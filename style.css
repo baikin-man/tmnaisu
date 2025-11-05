@@ -1,0 +1,62 @@
+/* 基本的なリセットとフォント */
+body {
+    margin: 0;
+    font-family: sans-serif; /* ロゴのフォントはサンセリフ系に見えます */
+}
+
+/* ヘッダー全体 */
+.site-header {
+    background-color: #666666; /* 画像の背景の濃い灰色 */
+    color: white; /* テキストとアイコンの色 */
+    padding: 10px 20px; /* 上下のパディングはロゴのサイズに合わせて調整 */
+    display: flex; /* 子要素を横並びにする */
+    align-items: center; /* 子要素を垂直方向の中央に揃える */
+    justify-content: space-between; /* 要素を両端に配置 */
+    height: 60px; /* ヘッダーの高さを設定 */
+}
+
+/* ロゴのスタイル */
+.logo h1 {
+    font-size: 40px; /* ロゴのサイズを調整 */
+    font-weight: bold;
+    margin: 0; /* h1タグのデフォルトのマージンをリセット */
+    letter-spacing: 2px; /* 文字間隔を調整 */
+}
+
+/* ハンバーガーメニューのコンテナ */
+.menu-icon-container {
+    width: 30px; /* アイコンの幅 */
+    height: 30px; /* アイコンの高さ */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer; /* クリック可能であることを示す */
+    margin-right: auto; /* ロゴとの間にスペースを確保 */
+}
+
+/* ハンバーガーメニューアイコンの線 */
+.menu-icon span {
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    margin: 6px 0; /* 線の間のスペース */
+    transition: 0.4s;
+    /* 真ん中の線のみ表示し、上下の線をコンテナの端に配置することで3本線のアイコンを表現 */
+}
+/* 画像では3本の線ではなく、シンプルな「三」の形に見えるため、
+よりシンプルな構造で「三」のアイコンを表現します */
+.menu-icon {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.menu-icon span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: white;
+}
