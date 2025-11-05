@@ -103,7 +103,7 @@
         </div>
         
         <div class="logo">
-            <h1>ZeZe</h1>
+            <a href="#"><h1>ZeZe</h1></a>
         </div>
         
         <div class="menu-icon-container spacer"></div>
