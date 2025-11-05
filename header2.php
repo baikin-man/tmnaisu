@@ -16,18 +16,18 @@
             background-color: #666666; /* 濃い灰色 */
             color: white; /* テキストとアイコンの色 */
             padding: 10px 20px;
-            display: flex; /* Flexboxを有効化 */
-            align-items: center; /* 垂直方向の中央揃え */
-            justify-content: space-between; /* 要素を両端に寄せる */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             height: 60px;
         }
 
         /* ロゴのコンテナ */
         .logo {
-            margin-right: 20px; /* 他の要素との間にスペースを確保 */
+            margin-right: 20px;
         }
         
-        /* ロゴのテキスト */
+        /* ロゴテキスト */
         .logo h1 {
             font-size: 65px;
             font-weight: bold;
@@ -36,7 +36,17 @@
             text-indent: 180px;
         }
 
-        /* ハンバーガーメニューアイコン */
+        /* ロゴリンク */
+        .logo a {
+            color: white;              /* 白文字 */
+            text-decoration: none;     /* 下線消す */
+        }
+
+        .logo a:hover {
+            opacity: 0.8;              /* ホバーで少し薄くする */
+        }
+
+        /* ハンバーガーメニュー */
         .menu-icon {
             width: 30px;
             height: 30px;
@@ -44,7 +54,7 @@
             flex-direction: column;
             justify-content: space-around;
             cursor: pointer;
-            margin-right: 20px; /* ロゴとの間にスペース */
+            margin-right: 20px;
         }
 
         .menu-icon span {
@@ -54,33 +64,29 @@
             background-color: white;
         }
 
-        /* 検索バーのコンテナ */
+        /* 検索バー */
         .search-container {
-            /* 検索バーがヘッダーの中央を占めるように flex-grow を設定 */
-            flex-grow: 1; 
-            max-width: 400px; /* 検索バーの最大幅を設定 */
-            margin: 0 20px; /* 左右にスペースを確保 */
+            flex-grow: 1;
+            max-width: 400px;
+            margin: 0 20px;
         }
 
-        /* 検索フォーム */
         .search-form {
             display: flex;
             border: 1px solid #ccc;
             border-radius: 5px;
-            overflow: hidden; /* 角丸を適用 */
-            background-color: white; /* フォームの背景は白 */
+            overflow: hidden;
+            background-color: white;
         }
 
-        /* 検索入力フィールド */
         .search-input {
             width: 100%;
             padding: 10px;
             border: none;
-            outline: none; /* フォーカス時の枠線を削除 */
+            outline: none;
             font-size: 16px;
         }
 
-        /* 検索ボタン（アイコン） */
         .search-button {
             background-color: white;
             color: #666666;
@@ -88,7 +94,7 @@
             padding: 10px 15px;
             cursor: pointer;
             font-size: 18px;
-            display: flex; /* アイコンを中央揃えにする */
+            display: flex;
             align-items: center;
         }
 
@@ -97,10 +103,10 @@
             font-size: 30px;
             color: white;
             cursor: pointer;
-            margin-left: 20px; /* 検索バーとの間にスペース */
+            margin-left: 20px;
         }
 
-        /* メインコンテンツの白い領域 */
+        /* メインコンテンツ */
         .main-content {
             padding: 20px;
             background-color: white;
@@ -120,7 +126,7 @@
             </div>
             
             <div class="logo">
-                <h1>ZeZe</h1>
+                <h1><a href="G2.php">ZeZe</a></h1>
             </div>
         </div>
 
@@ -128,17 +134,18 @@
             <form class="search-form" action="#" method="get">
                 <input type="search" class="search-input" placeholder="検索...">
                 <button type="submit" class="search-button">
-                    <i class="fas fa-search"></i> </button>
+                    <i class="fas fa-search"></i>
+                </button>
             </form>
         </div>
         
         <div class="cart-icon-container">
-            <i class="fas fa-shopping-cart cart-icon"></i> </div>
+            <i class="fas fa-shopping-cart cart-icon"></i>
+        </div>
         
     </header>
 
-    <main class="main-content">
-    </main>
+    <main class="main-content"></main>
 
 </body>
 </html>
