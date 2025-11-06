@@ -14,6 +14,12 @@
     <div id="background">
         <div class="container">
 
+<form action="G8.php">
+            <h2>商品合計</h2>
+            <button>レジへ移動</button>
+    </form>
+            <button><a href="G2.php">買い物を続ける</a></button>
+
         </div>
     </div>
 
