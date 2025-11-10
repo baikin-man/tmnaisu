@@ -1,0 +1,82 @@
+body {
+  font-family: "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+  background-color: #fff;
+}
+
+.container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+h2 {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.price-before {
+  font-size: 1.5em;
+  color: #000;
+  text-decoration: line-through;
+  margin: 5px 0;
+  position: relative;
+}
+
+.off {
+  color: #ff4d4d;
+  font-size: 0.7em;
+  position: absolute;
+  right: -70px;
+  top: 0;
+}
+
+.price-after {
+  color: #ff1f1f;
+  font-size: 1.8em;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.button-area {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* ✅ 水色の「レジへ移動」ボタン */
+.move-btn {
+  background-color: #d9ebf7;
+  border: 2px solid #444;
+  padding: 10px 25px;
+  border-radius: 12px;
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #000;
+  box-shadow: 2px 2px 4px #888;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.move-btn:hover {
+  background-color: #b8dff2;
+  transform: translateY(-2px);
+}
+
+/* ✅ 白い「買い物を続ける」ボタン */
+.continue-btn {
+  display: inline-block;
+  background-color: #fff;
+  color: #000;
+  border: 2px solid #ccc;
+  padding: 10px 25px;
+  border-radius: 12px;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 2px 2px 4px #ccc;
+  transition: 0.2s;
+}
+
+.continue-btn:hover {
+  background-color: #f2f2f2;
+  transform: translateY(-2px);
+}
