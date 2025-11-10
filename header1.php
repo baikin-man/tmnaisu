@@ -1,9 +1,5 @@
-<html lang="ja">
-<head>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-
-        <!-- header.php -->
+<!-- header.php -->
+<div id="header-style">
 <header class="header">
     <h1 id="center">ZeZe</h1>
 
@@ -32,7 +28,3 @@
   </nav>
 </div>
 </div>
-
-
-</div>
-    
