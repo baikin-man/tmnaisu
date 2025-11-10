@@ -13,15 +13,9 @@
 
     <div id="background">
         <div class="container">
-            <div class="mainImg">
 
-            </div>
-
-            <div class="subImg">
-                
-            </div>
         </div>
     </div>
-
 </body>
 </html>
+

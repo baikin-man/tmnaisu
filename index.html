@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZeZe - 中央寄せヘッダー</title>
+    <style>
+        /* =================================
+           CSS スタイル
+           ================================= */
+
+        /* 基本的なリセット */
+        body {
+            margin: 0;
+            font-family: sans-serif;
+        }
+
+        /* ヘッダー全体 */
+        .site-header {
+            background-color: #666666; /* 濃い灰色 */
+            color: white; /* テキストとアイコンの色 */
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            height: 60px;
+            justify-content: space-between;
+        }
+
+        /* ロゴのコンテナ */
+        .logo {
+            flex-grow: 1;
+            text-align: center;
+            margin: 0 auto;
+        }
+        
+        /* ロゴのテキスト */
+        .logo h1 {
+            font-size: 65px;
+            font-weight: bold;
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        /* ロゴのリンク設定 */
+        .logo a {
+            color: white;              /* 文字色を白に */
+            text-decoration: none;     /* 下線を消す */
+        }
+
+        .logo a:hover {
+            opacity: 0.8;              /* ホバー時に少し薄くする */
+        }
+
+        /* ハンバーガーメニューとスペーサーの共通 */
+        .menu-icon-container {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-icon-container.spacer {
+            width: 30px;
+            height: 30px;
+            visibility: hidden;
+        }
+
+        /* ハンバーガーメニューアイコン */
+        .menu-icon {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            cursor: pointer;
+        }
+
+        .menu-icon span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background-color: white;
+        }
+
+        /* メインコンテンツ */
+        .main-content {
+            padding: 20px;
+            background-color: white;
+            min-height: 500px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        
+        <div class="menu-icon-container">
+            <div class="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="logo">
+            <h1><a href="G2.php">ZeZe</a></h1>
+        </div>
+        
+        <div class="menu-icon-container spacer"></div>
+        
+    </header>
+
+    <main class="main-content"></main>
+
+</body>
+</html>
