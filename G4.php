@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel='stylesheet' href='./css/G2.css'>
+    <link rel='stylesheet' href='./css/G4.css'>
     <title>ZeZe</title>
 </head>
 <body>
@@ -14,11 +14,17 @@
     <div id="background">
         <div class="container">
 
-<form action="G8.php">
             <h2>商品合計</h2>
-            <button>レジへ移動</button>
-    </form>
-            <button><a href="G2.php">買い物を続ける</a></button>
+            <p class="price-before">¥28,190 <span class="off">¥2,819off!!</span></p>
+            <p class="price-after">¥25,371</p>
+
+            <div class="button-area">
+                <form action="G8.php" style="display:inline;">
+                    <button type="submit" class="move-btn">レジへ移動</button>
+                </form>
+
+                <a href="G2.php" class="continue-btn">買い物を続ける</a>
+            </div>
 
         </div>
     </div>
