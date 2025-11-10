@@ -1,7 +1,13 @@
+<?php session_start();?>
+<?php require 'db-connect.php';?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='./css/G2.css'>
+    <title>ZeZe</title>
+
     <title>購入確定画面 | ZeZe</title>
     <style>
         body {
@@ -63,7 +69,6 @@
     </style>
 </head>
 <body>
-
     <!-- ① 購入完了表示 -->
     <div class="complete-box">
         購入が確定しました
@@ -76,7 +81,5 @@
     <div class="recommend-title">おすすめの商品はこちら</div>
         <?php endforeach; ?>
     </div>
-
 </body>
 </html>
-

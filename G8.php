@@ -1,8 +1,11 @@
+<?php session_start();?>
+<?php require 'db-connect.php';?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>G8</title>
 </head>
 <body>
@@ -39,6 +42,7 @@
   <button class="address-btn">住所を変更する</button>
   <button class="order-btn">注文を確定する</button>
 </div> 
+
 
 </body>
 </html>
