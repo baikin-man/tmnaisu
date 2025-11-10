@@ -9,7 +9,7 @@
     <title>ZeZe</title>
 </head>
 <body>
-    <?php require 'header.php';?>
+    <?php require 'header1.php';?>
 
     <div id="background">
         <div class="container">
