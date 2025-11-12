@@ -29,6 +29,8 @@
     position:relative;
   }
 
+
+
   /* 背景上に薄い暗いオーバーレイを重ねる */
   body::before{
     content:"";
@@ -72,6 +74,7 @@
     letter-spacing:1px;
     font-weight:700;
   }
+
 
   /* inputラウンドデザイン */
   .field{
@@ -149,6 +152,7 @@
   }
 </style>
 </head>
+   <?php require './header.php'; ?>
 <body>
 
   <!-- ヘッダー（ロゴをクリックで G2.php に飛ばす） -->
@@ -157,9 +161,6 @@
 
   <!-- メイン -->
   <div class="wrap">
-    <?php
-    require './header1.php';
-    ?>
     <div class="login-card" role="region" aria-label="ログイン">
       <h2>Login</h2>
 
