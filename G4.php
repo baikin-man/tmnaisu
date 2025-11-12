@@ -15,7 +15,7 @@
         <div class="container">
 
             <h2>商品合計</h2>
-            <p class="price-before">¥28,190 <span class="off">¥2,819off!!</span></p>
+            <p class="price-before">¥28,190</p>
             <p class="price-after">¥25,371</p>
 
             <div class="button-area">
