@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>住所変更フォーム</title>
   <link rel="stylesheet" href="./css/G6.css">
-  <link rel="stylesheet" href="./css/G2.css">
+  <link rel="stylesheet" href="./css/header.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
 </head>
 <body>

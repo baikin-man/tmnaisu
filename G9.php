@@ -5,7 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel='stylesheet' href='./css/G2.css'>
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <title>ZeZe</title>
 
     <title>購入確定画面 | ZeZe</title>
@@ -70,6 +71,7 @@
 </head>
 <body>
     <!-- ① 購入完了表示 -->
+
     <div class="complete-box">
         購入が確定しました
     </div>
@@ -79,7 +81,7 @@
 
     <!-- ③～⑤ おすすめ商品表示 -->
     <div class="recommend-title">おすすめの商品はこちら</div>
-        <?php endforeach; ?>
+ 
     </div>
 </body>
 </html>
