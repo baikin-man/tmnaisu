@@ -1,7 +1,7 @@
 <!-- header.php -->
 <div id="header-style">
 <header class="header">
-    <h1 id="center">ZeZe</h1>
+    <h1 id="center"><a href="G2.php">ZeZe</a></h1>
 
 
 <i class="fas fa-shopping-cart" id = "cart-icon"></i>
@@ -20,11 +20,24 @@
   
   <nav class="menu">
     <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Service</a></li>
-      <li><a href="#">Contact</a></li>
+      <h2>人気・新着の商品</h2>
+      <li><a href="#">ランキング</a></li>
+      <li><a href="#">新着商品</a></li>
+      <p>────────────</p>
+      <h2>設定とヘルプ</h2>
+      <li><a href="#">アカウントサービス</a></li>
+      <li><a href="#">住所を変更</a></li>
+      <li><a href="#">日本語</a></li>
+      <li><a href="#">ログアウト</a></li>
+      <p>────────────</p>
+      <li><a href="#">お問い合わせ</a></li>
+
     </ul>
   </nav>
 </div>
 </div>
+
+
+    
+</body>
+</html>
