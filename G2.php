@@ -1,4 +1,8 @@
-<?php session_start();?>
+<?php 
+
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+session_start();?>
 <?php require 'db-connect.php';?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -6,10 +10,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='./css/G2.css'>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <title>ZeZe</title>
 </head>
 <body>
-    <?php require 'header.php';?>
+    <?php require 'header1.php';?>
 
     <div id="background">
         <div class="container">
