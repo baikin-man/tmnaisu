@@ -1,0 +1,141 @@
+/* スペースを追加して修正 */
+#header-style .header {
+  display: flex; /* セミコロンを1つに修正 */
+  background-color: darkgrey;
+}
+
+/* h1 も #header-style の中だけに限定 */
+#header-style h1 {
+  color: white;
+  font-size: 75px;
+}
+
+/* IDセレクタは単独でもOK */
+#center{
+  margin: 0 auto;
+}
+
+
+/* ハンバーガーメニューのスタイル */
+/* スペースを追加して修正 */
+#header-style .menu-wrapper {
+  position: relative;
+}
+
+/* スペースを追加して修正 */
+#header-style .menu-icon {
+  width: 50px;
+  height: 50px;
+  position: fixed; /* ← fixedにして常に左上固定 */
+  top: 45px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 3;
+  display: inline-block;
+}
+
+/* スペースを追加して修正 */
+#header-style .menu-icon span {
+  display: block;
+  height: 4px;
+  margin: 6px 0;
+  background: gainsboro;
+  border-radius: 2px;
+  transition: 0.4s;
+}
+
+/* ハンバーガーがXに変形
+  (ここはID #menu-toggle を基点にしているので、修正不要でそのまま動作します) 
+*/
+#menu-toggle:checked + .menu-icon span:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
+}
+#menu-toggle:checked + .menu-icon span:nth-child(2) {
+  opacity: 0;
+}
+#menu-toggle:checked + .menu-icon span:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
+}
+
+/* オーバーレイ背景 
+  (ベースのスタイルにスペースを追加修正)
+*/
+#header-style .overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
+  z-index: 1;
+}
+
+/* (ここはID #menu-toggle を基点にしているので、修正不要) 
+*/
+#menu-toggle:checked ~ .overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* メニュー本体（左から出す） 
+  (ベースのスタイルにスペースを追加修正)
+*/
+#header-style .menu {
+  position: fixed;
+  top: 0;
+  left: -250px; /* ← 初期位置を左へ */
+  width: 250px;
+  height: 100%;
+  background: white;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+  transition: left 0.4s ease;
+  z-index: 2;
+}
+
+/* (ここはID #menu-toggle を基点にしているので、修正不要) 
+*/
+#menu-toggle:checked ~ .menu {
+  left: 0; /* ← 開いたときは左0へ */
+}
+
+/* スペースを追加して修正 */
+#header-style .menu ul {
+  list-style: none;
+  padding: 60px 20px;
+}
+
+/* スペースを追加して修正 */
+#header-style .menu li {
+  margin: 20px 0;
+}
+
+/* スペースを追加して修正 */
+#header-style .menu a {
+  text-decoration: none;
+  color: #333;
+  font-size: 1.2rem;
+  transition: color 0.3s;
+}
+
+/* スペースを追加して修正 */
+#header-style .menu a:hover {
+  color: #007bff;
+}
+
+/*　カートアイコン　*/
+/* IDセレクタなので、そのままでOK */
+#cart-icon {
+  font-size: 50px;    /* アイコンサイズ */
+  color: whitesmoke;        /* 色 */
+  position: absolute;   /* 位置指定（ヘッダー右上などに） */
+  top: 40px;
+  right: 40px;
+  cursor: pointer;      /* ホバーでクリック感を出す */
+  transition: 0.3s;     /* アニメーション */
+}
+
+/* IDセレクタなので、そのままでOK */
+#cart-icon:hover {
+  color: gray;
+  transform: scale(1.1);  /* ちょっと拡大 */
+}
