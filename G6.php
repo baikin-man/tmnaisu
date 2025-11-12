@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel='stylesheet' href='./css/G2.css'>
-    <title>ZeZe</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>住所変更フォーム</title>
@@ -77,4 +73,4 @@
     });
   </script>
 </body>
-</html></html>
+</html>
