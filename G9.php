@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/header2.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <title>ZeZe</title>
 
@@ -71,7 +71,7 @@
 </head>
 <body>
     <!-- ① 購入完了表示 -->
-    <?php require 'header1.php';?>
+    <?php require 'header2.php';?>
     <div class="complete-box">
         購入が確定しました
     </div>
