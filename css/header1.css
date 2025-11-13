@@ -1,0 +1,131 @@
+header {
+  display: flex;;
+  background-color: #696969;
+}
+h1{
+  color: white;
+  font-size: 75px;
+}
+
+.header h1 a {
+  color: inherit;       /* h1の色を引き継ぐ */
+  text-decoration: none; /* 下線を消す */
+}
+
+.header h1 a:hover {
+  opacity: 0.8;         /* ホバー時の軽いエフェクト */
+}
+
+
+
+#center{
+  margin: 0 auto;
+}
+
+
+/* ハンバーガーメニューのスタイル */
+.menu-wrapper {
+  position: relative;
+}
+
+.menu-icon {
+  width: 50px;
+  height: 50px;
+  position: fixed; /* ← fixedにして常に左上固定 */
+  top: 45px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 3;
+  display: inline-block;
+}
+
+.menu-icon span {
+  display: block;
+  height: 4px;
+  margin: 6px 0;
+  background: gainsboro;
+  border-radius: 2px;
+  transition: 0.4s;
+}
+
+/* ハンバーガーがXに変形 */
+#menu-toggle:checked + .menu-icon span:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
+}
+#menu-toggle:checked + .menu-icon span:nth-child(2) {
+  opacity: 0;
+}
+#menu-toggle:checked + .menu-icon span:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
+}
+
+/* オーバーレイ背景 */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
+  z-index: 1;
+}
+
+#menu-toggle:checked ~ .overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* メニュー本体（左から出す） */
+.menu {
+  position: fixed;
+  top: 0;
+  left: -300px; /* ← 初期位置を左へ */
+  width: 300px;
+  height: 100%;
+  background: white;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+  transition: left 0.4s ease;
+  z-index: 2;
+}
+
+#menu-toggle:checked ~ .menu {
+  left: 0; /* ← 開いたときは左0へ */
+}
+
+.menu ul {
+  list-style: none;
+  padding: 60px 20px;
+}
+
+.menu li {
+  margin: 20px 0;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #333;
+  font-size: 1.2rem;
+  transition: color 0.3s;
+}
+
+.menu a:hover {
+  color: #007bff;
+}
+
+/*　カートアイコン　*/
+/* cartアイコンの位置や色を変更 */
+#cart-icon {
+  font-size: 50px;     /* アイコンサイズ */
+  color: whitesmoke;         /* 色 */
+  position: absolute;  /* 位置指定（ヘッダー右上などに） */
+  top: 40px;
+  right: 40px;
+  cursor: pointer;     /* ホバーでクリック感を出す */
+  transition: 0.3s;    /* アニメーション */
+}
+
+/* ホバー時の色変更 */
+#cart-icon:hover {
+  color: gray;
+  transform: scale(1.1);  /* ちょっと拡大 */
+}

@@ -6,11 +6,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='./css/G4.css'>
-    <link rel='stylesheet' href='./css/header.css'>
+    <link rel='stylesheet' href='./css/header2.css'>
     <title>ZeZe</title>
 </head>
 <body>
-    <?php require 'header1.php';?>
+    <?php require 'header2.php';?>
 
     <div id="background">
         <div class="container">
