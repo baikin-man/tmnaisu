@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ZeZe - 注文確認</title>
+  <?php require_once 'header2.php'; ?>
   <style>
     body {
       font-family: "Hiragino Kaku Gothic ProN", "メイリオ", sans-serif;
@@ -128,7 +129,6 @@
 </head>
 <body>
 
-<header>ZeZe</header>
 
 <div class="main">
 
