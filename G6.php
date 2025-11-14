@@ -13,8 +13,6 @@
 </head>
       <?php require 'header1.php';?>
 <body>
-=======
-    <?php require 'header2.php';?>
 
   <div class="container">
     <h2>住所変更</h2>

@@ -1,12 +1,16 @@
 <?php session_start();?>
+<?php
+ini_set('display_errors', 1); // エラーを画面に表示する
+error_reporting(E_ALL);?>
 <?php require 'db-connect.php';?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/G3.css">
+    <link rel="stylesheet" href="./css/G3.css">
     <title>Product Page</title>
+
 </head>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -79,7 +83,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 <body>
-     <?php require 'header.php';?>
+
+     <?php require 'header2.php';?>
 
     <div class="product-container">
         <div class="image-section">
@@ -106,6 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <button class="size" type="button">L <span>175-185</span></button>
                 <button class="size" type="button">XL <span>175-185</span></button>
             </div>
+
 
             <div class="color-list">
                 <button class="color black" type="button"></button>

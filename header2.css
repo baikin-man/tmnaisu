@@ -72,6 +72,10 @@ h1{
   z-index: 1;
 }
 
+/*.kotei {
+  position: fixed;
+}*/
+
 #menu-toggle:checked ~ .overlay {
   opacity: 1;
   pointer-events: auto;

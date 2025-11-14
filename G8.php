@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./css/header2.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
   <title>ZeZe - 注文確認</title>
   <?php require_once 'header2.php'; ?>
@@ -168,7 +167,6 @@
   </style>
 </head>
 <body>
-
 
 <?php require 'header2.php';?>
 

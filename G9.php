@@ -10,13 +10,13 @@
     <title>ZeZe</title>
 
     <title>購入確定画面 | ZeZe</title>
+    <?php require 'header2.php';?>
     <style>
         body {
             font-family: "Yu Gothic", sans-serif;
             background: #f8f8f8;
             text-align: center;
-            margin: 0;
-            padding: 30px;
+
         }
         .complete-box {
             border: 3px solid #000;
@@ -71,7 +71,7 @@
 </head>
 <body>
     <!-- ① 購入完了表示 -->
-    <?php require 'header2.php';?>
+    
     <div class="complete-box">
         購入が確定しました
     </div>
