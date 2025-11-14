@@ -8,8 +8,9 @@
 <header class="header">
     <h1 id="left"><a href="G2.php">ZeZe</a></h1>
 
-
-<i class="fas fa-shopping-cart" id = "cart-icon"></i>
+<a href="G4.php" class="cart-link" aria-label="カートへ">
+  <i class="fas fa-shopping-cart" id="cart-icon"></i>
+</a>
 <form action="G7.php" method="get" class="search-box">
   <input type="text" name="keyword" placeholder="キーワードを入力...">
   <button type="submit" class="search-btn">

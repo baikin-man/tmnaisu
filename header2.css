@@ -27,7 +27,7 @@ h1{
 
 /* ハンバーガーメニューのスタイル */
 .menu-wrapper {
-  position: relative;
+  position: fixed;
 }
 
 .menu-icon {

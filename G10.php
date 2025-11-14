@@ -9,15 +9,7 @@
     <title>ZeZe</title>
 </head>
 <body>
-    <?php require 'header.php';?>
-
-    <div id="background">
-        <div class="container">
-
-<<<<<<< Updated upstream
-        </div>
-    </div>
-=======
+    <?php require 'heade2.php';?>
 <div class="wrap">
   <h2>新規登録</h2>
 
@@ -62,9 +54,5 @@
   </div>
 
   <button class="create-btn">同意して作成</button>
-
-</div>
->>>>>>> Stashed changes
-
 </body>
 </html>
