@@ -5,11 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>住所変更フォーム</title>
   <link rel="stylesheet" href="./css/G6.css">
+
+=======
   <link rel="stylesheet" href="./css/header1.css">
+
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
 </head>
+      <?php require 'header1.php';?>
 <body>
+=======
     <?php require 'header2.php';?>
+
   <div class="container">
     <h2>住所変更</h2>
     <form method="post" action="address-update.php">

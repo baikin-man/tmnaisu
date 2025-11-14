@@ -1,10 +1,14 @@
+<html lang="ja">
+    <link rel="stylesheet" href="header1.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    
 <!-- header.php -->
-<div id="header-style">
 <header class="header">
     <h1 id="center"><a href="G2.php">ZeZe</a></h1>
 
-
-<i class="fas fa-shopping-cart" id = "cart-icon"></i>
+<a href="G4.php" class="cart-link" aria-label="カートへ">
+  <i class="fas fa-shopping-cart" id="cart-icon"></i>
+</a>
 </header>
 
     <div class="menu-wrapper">
@@ -36,8 +40,3 @@
   </nav>
 </div>
 </div>
-
-
-    
-</body>
-</html>

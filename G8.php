@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="./css/header2.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
   <title>ZeZe - 注文確認</title>
+  <?php require_once 'header2.php'; ?>
   <style>
     body {
       font-family: "Hiragino Kaku Gothic ProN", "メイリオ", sans-serif;
@@ -168,7 +169,9 @@
 </head>
 <body>
 
+
 <?php require 'header2.php';?>
+
 
 <div class="main">
 
