@@ -9,7 +9,11 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
 </head>
 <body>
+<<<<<<< Updated upstream
     <?php require 'header2.php';?>
+=======
+
+>>>>>>> Stashed changes
   <div class="container">
     <h2>住所変更</h2>
     <form method="post" action="address-update.php">

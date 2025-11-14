@@ -1,0 +1,156 @@
+body {
+    font-family: sans-serif;
+    background: #f5f5f5;
+    margin: 0;
+}
+
+.product-container {
+    display: flex;
+    gap: 40px;
+    max-width: 800px;
+    margin: auto;
+}
+
+/* ----- 左側：画像エリア ----- */
+.image-section {
+    position: relative;
+}
+
+.main-image {
+    width: 420px;
+    height: 320px;
+    background: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+}
+
+.nav-btn {
+    position: absolute;
+    top: 45%;
+    background: #ddd;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 22px;
+    transition: 0.2s;
+}
+
+.nav-btn:hover {
+    background: #ccc;
+}
+
+.nav-btn.left { left: -30px; }
+.nav-btn.right { right: -30px; }
+
+.thumbnail-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.thumb {
+    width: 110px;
+    height: 80px;
+    background: #eee;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.thumb:hover {
+    filter: brightness(0.9);
+}
+
+.thumb.selected {
+    outline: 3px solid #4aa3ff;
+}
+
+/* ----- 右側：商品情報エリア ----- */
+.info-section {
+    width: 300px;
+}
+
+.price {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* サイズボタン */
+.size-list button.size {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 1px solid #bfbfbf;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 20px;
+    background: #fff;
+    transition: 0.2s;
+}
+
+.size-list button.size:hover {
+    background: #e7e7e7;
+}
+
+button.size.selected {
+    background: #4aa3ff;
+    color: #fff;
+    border-color: #1f7bd8;
+    font-weight: bold;
+}
+
+/* カラー選択ボタン */
+.color-list {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.color-list button.color {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.color-list button.color:hover {
+    transform: scale(1.1);
+}
+
+button.color.selected {
+    border: 3px solid #4aa3ff;
+}
+
+.black { background: #000; }
+.white { background: #fff; }
+.red { background: red; }
+.yellow { background: #f7d78a; }
+.blue { background: blue; }
+.purple { background: #3b0099; }
+
+.cart-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 22px;
+    background: #dff1ff;
+    border: 2px solid #9ec9e8;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.25s;
+}
+
+.cart-btn:hover {
+    background: #c5e7ff;
+}

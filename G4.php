@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='./css/G4.css'>
-    <link rel='stylesheet' href='./css/header2.css'>
     <title>ZeZe</title>
 </head>
 <body>

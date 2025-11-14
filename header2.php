@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
 
         <!-- header.php -->
+<div class="kotei">
 <header class="header">
     <h1 id="left"><a href="G2.php">ZeZe</a></h1>
 
@@ -28,6 +29,7 @@
   
 
 </form>
+    </div>
 
   <div class="overlay"></div>
   
