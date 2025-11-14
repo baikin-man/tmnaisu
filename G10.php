@@ -8,8 +8,94 @@
     <link rel='stylesheet' href='./css/G2.css'>
     <title>ZeZe</title>
 </head>
+<style>
+  body {
+    margin: 0;
+    font-family: "Hiragino Kaku Gothic ProN", "メイリオ", sans-serif;
+    background: url('bg.jpg') center/cover no-repeat;
+  }
+  /* 上部ヘッダー */
+  header {
+    width: 100%;
+    padding: 15px 0;
+    background-color: #777;
+    color: #fff;
+    font-size: 28px;
+    text-align: center;
+    letter-spacing: 2px;
+    font-weight: bold;
+  }
+  .wrap {
+    width: 420px;
+    margin: 40px auto;
+    padding: 35px 45px;
+    background: rgba(255,255,255,0.85);
+    border-radius: 15px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.15);
+  }
+  h2 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 25px;
+  }
+  .input-box {
+    margin-bottom: 18px;
+  }
+  .input-box label {
+    display: block;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 6px;
+  }
+  .input-box input {
+    width: 100%;
+    padding: 14px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+  }
+  .input-box input::placeholder {
+    color: #bbb;
+  }
+  /* 利用規約部分 */
+  .terms {
+    font-size: 14px;
+    color: #333;
+    margin: 10px 0 18px;
+  }
+  .terms a {
+    color: #1a73e8;
+    text-decoration: underline;
+  }
+  /* 登録ボタン */
+  .create-btn {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    background-color: #8ec8ff;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+  }
+  .create-btn:hover {
+    background-color: #6db6ff;
+  }
+  /* チェックボックス */
+  .agree-area {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 15px;
+  }
+  .agree-area input {
+    transform: scale(1.25);
+  }
+</style>
 <body>
-    <?php require 'heade2.php';?>
+    <?php require 'header2.php';?>
 <div class="wrap">
   <h2>新規登録</h2>
 
