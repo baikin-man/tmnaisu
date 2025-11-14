@@ -84,12 +84,40 @@
       color: #333;
     }
 
-    .card-input input {
+    .card-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .card-form .full {
+      grid-column: 1 / -1;
+    }
+
+    .card-form label {
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .card-form input, .card-form select {
       width: 100%;
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    .small-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .small-row .half {
+      flex: 1 1 0;
     }
 
     .buttons {
@@ -124,6 +152,16 @@
     .order-btn:hover {
       background-color: #ffb700;
     }
+
+    /* レスポンシブ微調整 */
+    @media (max-width: 520px) {
+      .card-form {
+        grid-template-columns: 1fr;
+      }
+      .small-row {
+        flex-direction: column;
+      }
+    }
   </style>
 </head>
 <body>
@@ -153,9 +191,58 @@
 
     <div class="pay-option">
       <label><input type="radio" name="payment"> カードで支払い</label>
-      <div class="card-input">
-        <input type="text" maxlength="19" placeholder="XXXX-XXXX-XXXX-XXXX">
-      </div>
+
+      <!-- カード入力フォーム -->
+      <form class="card-input-form" onsubmit="return false;" autocomplete="on" aria-label="クレジットカード情報">
+        <div class="card-form">
+          <!-- カード番号（ハイフン自動挿入） -->
+          <div class="full">
+            <label for="card-number">カード番号</label>
+            <input id="card-number" name="card-number" type="text" inputmode="numeric"
+                   maxlength="19" placeholder="XXXX-XXXX-XXXX-XXXX"
+                   autocomplete="cc-number" aria-describedby="card-number-help" />
+            <small id="card-number-help" style="color:#666;display:block;margin-top:6px;font-size:13px;">
+              4桁ごとにハイフンが自動で入ります。
+            </small>
+          </div>
+
+          <!-- カード名義 -->
+          <div class="full">
+            <label for="card-name">カード名義（ローマ字）</label>
+            <input id="card-name" name="card-name" type="text" autocomplete="cc-name" placeholder="TARO YAMADA" />
+          </div>
+
+          <!-- 有効期限とセキュリティコード -->
+          <div class="small-row">
+            <div class="half">
+              <label for="exp-month">有効期限</label>
+              <div style="display:flex; gap:8px;">
+                <select id="exp-month" name="exp-month" autocomplete="cc-exp-month" aria-label="有効期限 月">
+                  <option value="">MM</option>
+                  <option value="01">01</option><option value="02">02</option><option value="03">03</option>
+                  <option value="04">04</option><option value="05">05</option><option value="06">06</option>
+                  <option value="07">07</option><option value="08">08</option><option value="09">09</option>
+                  <option value="10">10</option><option value="11">11</option><option value="12">12</option>
+                </select>
+
+                <select id="exp-year" name="exp-year" autocomplete="cc-exp-year" aria-label="有効期限 年">
+                  <option value="">YY</option>
+                  <!-- 今後の年は必要に応じて増やしてください -->
+                  <option value="25">25</option><option value="26">26</option><option value="27">27</option>
+                  <option value="28">28</option><option value="29">29</option><option value="30">30</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="half">
+              <label for="cvc">セキュリティコード（CVC/CVV）</label>
+              <input id="cvc" name="cvc" type="text" inputmode="numeric" maxlength="4" placeholder="123" autocomplete="cc-csc" />
+            </div>
+          </div>
+
+        </div>
+      </form>
+
     </div>
   </div>
 
@@ -165,6 +252,58 @@
   </div>
 
 </div>
+
+<script>
+  (function() {
+    const cardInput = document.getElementById('card-number');
+    const cvcInput = document.getElementById('cvc');
+
+    // 数字のみの正規表現
+    function digitsOnly(str) {
+      return str.replace(/\D/g, '');
+    }
+
+    // カード番号を4桁ごとにハイフン挿入（最大16桁まで表示）
+    function formatCardNumber(value) {
+      const digits = digitsOnly(value).slice(0, 16); // カード番号は最大16桁想定（必要なら調整）
+      const parts = [];
+      for (let i = 0; i < digits.length; i += 4) {
+        parts.push(digits.substring(i, i + 4));
+      }
+      return parts.join('-');
+    }
+
+    // 入力イベント
+    cardInput.addEventListener('input', (e) => {
+      const prev = cardInput.value;
+      const formatted = formatCardNumber(prev);
+      cardInput.value = formatted;
+    });
+
+    // 貼り付け時の処理（非数字を除去してフォーマット）
+    cardInput.addEventListener('paste', (e) => {
+      e.preventDefault();
+      const text = (e.clipboardData || window.clipboardData).getData('text');
+      const formatted = formatCardNumber(text);
+      cardInput.value = formatted;
+    });
+
+    // CVCは数字のみ
+    cvcInput.addEventListener('input', () => {
+      cvcInput.value = digitsOnly(cvcInput.value).slice(0, 4);
+    });
+
+    // フォーカス時に既存のハイフンを残したいが、カーソル位置簡素化のためカーソル末尾へ
+    cardInput.addEventListener('focus', () => {
+      // カーソルを末尾に置く
+      const len = cardInput.value.length;
+      cardInput.setSelectionRange(len, len);
+    });
+
+    // 補助: Enterで何かしたい場合はここに追加できます
+    // 例: document.querySelector('.order-btn').addEventListener('click', submitPayment);
+  })();
+</script>
 
 </body>
 </html>
