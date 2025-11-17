@@ -6,7 +6,6 @@ body {
     color: #333;
     margin: 0;
     padding-top: 115px; /* header2.cssの高さに合わせる */
-    padding-top: 115px;
 }
 
 a { text-decoration: none; color: inherit; transition: 0.3s; }
@@ -48,7 +47,7 @@ img { max-width: 100%; height: auto; vertical-align: bottom; }
     display: flex;
     justify-content: space-between;
     gap: 20px;
-    margin-bottom: 60px;
+    margin-bottom: 20px; /* ★ 修正: タグリストとの間隔を 20px に調整 */
 }
 .cat-btn {
     flex: 1;
@@ -70,6 +69,55 @@ img { max-width: 100%; height: auto; vertical-align: bottom; }
 .cat-btn.mens { background: linear-gradient(45deg, #2c3e50, #3498db); }
 .cat-btn.ladies { background: linear-gradient(45deg, #c0392b, #e74c3c); }
 .cat-btn.kids { background: linear-gradient(45deg, #f39c12, #f1c40f); }
+
+/* ★ ここから追加: タグリストが無い場合に、カテゴリとその下の間隔を確保する */
+.category-nav + .section-title {
+    margin-top: 60px;
+}
+/* ★ 追加ここまで */
+
+
+/* ★ ここから追加: 全タグナビゲーション */
+.tag-list-nav {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 20px 15px;
+    background: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+.tag-list-nav h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    color: #555;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.tag-list-nav .tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+.tag-list-nav .tag-btn {
+    display: inline-block;
+    padding: 5px 12px;
+    font-size: 0.85rem;
+    color: #007bff;
+    background-color: #f0f8ff;
+    border: 1px solid #bde0ff;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: 0.2s;
+}
+.tag-list-nav .tag-btn:hover {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+/* ★ 追加ここまで */
+
 
 /* セクション見出し */
 .section-title {

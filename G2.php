@@ -1,4 +1,4 @@
-<?php
+<?php 
 session_start();
 require 'db-connect.php';
 
@@ -21,12 +21,21 @@ $skuSubQueries = "
 ";
 
 // 1. 新着商品 (IDの降順で最新4件)
-$sql_new = "SELECT i.*, $skuSubQueries FROM items i ORDER BY i.id DESC LIMIT 4";
+$sql_new = "SELECT i.*, $skuSubQueries FROM items i WHERE i.status = 1 ORDER BY i.id DESC LIMIT 4"; // ★ status=1 (販売中) を追加
 $stmt_new = $pdo->query($sql_new);
 $new_items = $stmt_new->fetchAll(PDO::FETCH_ASSOC);
 
-// 2. 人気商品 (ランダムで4件表示)
-$sql_pop = "SELECT i.*, $skuSubQueries FROM items i ORDER BY RAND() LIMIT 4";
+// 2. 人気商品 (閲覧数が多い順で4件)
+// ★ 修正: RAND() ではなく item_view_history を集計した人気順に変更
+$sql_pop = "
+    SELECT i.*, $skuSubQueries, COUNT(v.item_id) as view_count
+    FROM items i
+    LEFT JOIN item_view_history v ON i.id = v.item_id
+    WHERE i.status = 1
+    GROUP BY i.id
+    ORDER BY view_count DESC, i.id DESC
+    LIMIT 4
+";
 $stmt_pop = $pdo->query($sql_pop);
 $pop_items = $stmt_pop->fetchAll(PDO::FETCH_ASSOC);
 
@@ -36,10 +45,6 @@ $history_items = [];
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
 
-    // SQL解説:
-    // サブクエリ(h)で item_view_history からユーザーの閲覧履歴を item_id ごとにグループ化し、
-    // 最新の閲覧日時(MAX(viewed_at))を取得して、その降順で上位4件を絞り込みます。
-    // その結果(h)と itemsテーブル(i)を結合して商品情報を取得します。
     $sql_hist = "
         SELECT i.*, $skuSubQueries
         FROM items i
@@ -51,13 +56,20 @@ if (isset($_SESSION['user_id'])) {
             ORDER BY latest_view DESC
             LIMIT 4
         ) h ON i.id = h.item_id
+        WHERE i.status = 1 -- ★ 閲覧履歴でも販売中のもののみ表示
         ORDER BY h.latest_view DESC
     ";
-
+    
     $stmt_hist = $pdo->prepare($sql_hist);
     $stmt_hist->execute([$user_id]);
     $history_items = $stmt_hist->fetchAll(PDO::FETCH_ASSOC);
 }
+
+// ★ 4. 全てのタグを取得
+$sql_tags = "SELECT name FROM tags ORDER BY id ASC";
+$stmt_tags = $pdo->query($sql_tags);
+$all_tags = $stmt_tags->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -69,7 +81,11 @@ if (isset($_SESSION['user_id'])) {
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <!-- 共通ヘッダーCSS -->
     <link rel="stylesheet" href="header2.css">
-    <link rel="stylesheet" href="./css/G2.css">
+    
+    <!-- ★ 修正: G2.css のパス確認 -->
+    <!-- もし G2.css が 'css' フォルダの中にある場合は './css/G2.css' にしてください -->
+    <link rel="stylesheet" href="./css/G2.css"> 
+    
     <title>ZeZe | ホーム</title>
 </head>
 
@@ -96,6 +112,21 @@ if (isset($_SESSION['user_id'])) {
                 <span>KIDS'</span>
             </a>
         </div>
+
+        <!-- ★ 5. 全タグリスト表示エリア -->
+        <?php if (!empty($all_tags)): ?>
+        <div class="tag-list-nav">
+            <h4>タグから探す</h4>
+            <div class="tags">
+                <?php foreach ($all_tags as $tag): ?>
+                    <a href="G7.php?tag=<?= htmlspecialchars($tag['name']) ?>" class="tag-btn">
+                        <?= htmlspecialchars($tag['name']) ?>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <?php endif; ?>
+
 
         <!-- 人気商品エリア -->
         <h3 class="section-title">Popular Items / 人気商品</h3>
@@ -163,5 +194,4 @@ if (isset($_SESSION['user_id'])) {
     </div>
 
 </body>
-
 </html>
