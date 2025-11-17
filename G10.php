@@ -1,144 +1,128 @@
 <?php session_start();?>
 <?php require 'db-connect.php';?>
+<?php
+// 既にログイン済みの場合は、G2（トップページ）にリダイレクト
+if (isset($_SESSION['user_id'])) {
+    header('Location: G2.php'); // ※G2.phpはトップページのパスを想定
+    exit;
+}
+
+// エラーメッセージの取得
+$error_message = '';
+if (isset($_GET['error'])) {
+    if ($_GET['error'] == 'email') {
+        $error_message = 'このメールアドレスは既に使用されています。';
+    } else if ($_GET['error'] == 'db') {
+        $error_message = 'データベースエラーが発生しました。';
+    } else if ($_GET['error'] == 'data') {
+        $error_message = '入力内容が正しくありません。';
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel='stylesheet' href='./css/G2.css'>
-    <title>ZeZe</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    
+    <title>ZeZe - 新規登録</title>
+    
+    <!-- ★ 外部CSSの読み込み ★ -->
+    <link rel="stylesheet" href="header2.css"> <!-- ヘッダーCSS -->
+    <link rel="stylesheet" href="./css/G10.css">   <!-- このページ専用CSS -->
+
+    <!-- ★ 固定ヘッダー用の余白 ★ -->
+    <style>
+        body {
+            /* header2.css の .kotei の高さと合わせる */
+            padding-top: 115px; 
+            
+            /* 元の<style>タグにあった body スタイル */
+            /* 背景画像を使いたい場合は、以下のコメントを解除してください */
+            /*
+            margin: 0;
+            font-family: "Hiragino Kaku Gothic ProN", "メイリオ", sans-serif;
+            background: url('bg.jpg') center/cover no-repeat;
+            */
+        }
+    </style>
 </head>
-<style>
-  body {
-    margin: 0;
-    font-family: "Hiragino Kaku Gothic ProN", "メイリオ", sans-serif;
-    background: url('bg.jpg') center/cover no-repeat;
-  }
-  /* 上部ヘッダー */
-  header {
-    width: 100%;
-    padding: 15px 0;
-    background-color: #777;
-    color: #fff;
-    font-size: 28px;
-    text-align: center;
-    letter-spacing: 2px;
-    font-weight: bold;
-  }
-  .wrap {
-    width: 420px;
-    margin: 40px auto;
-    padding: 35px 45px;
-    background: rgba(255,255,255,0.85);
-    border-radius: 15px;
-    box-shadow: 0 5px 18px rgba(0,0,0,0.15);
-  }
-  h2 {
-    text-align: center;
-    font-size: 28px;
-    margin-bottom: 25px;
-  }
-  .input-box {
-    margin-bottom: 18px;
-  }
-  .input-box label {
-    display: block;
-    font-weight: bold;
-    color: #555;
-    margin-bottom: 6px;
-  }
-  .input-box input {
-    width: 100%;
-    padding: 14px 12px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    outline: none;
-  }
-  .input-box input::placeholder {
-    color: #bbb;
-  }
-  /* 利用規約部分 */
-  .terms {
-    font-size: 14px;
-    color: #333;
-    margin: 10px 0 18px;
-  }
-  .terms a {
-    color: #1a73e8;
-    text-decoration: underline;
-  }
-  /* 登録ボタン */
-  .create-btn {
-    width: 100%;
-    padding: 12px 0;
-    font-size: 18px;
-    border: none;
-    border-radius: 8px;
-    background-color: #8ec8ff;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.2s;
-  }
-  .create-btn:hover {
-    background-color: #6db6ff;
-  }
-  /* チェックボックス */
-  .agree-area {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 15px;
-  }
-  .agree-area input {
-    transform: scale(1.25);
-  }
-</style>
 <body>
     <?php require 'header2.php';?>
 <div class="wrap">
-  <h2>新規登録</h2>
+    <h2>新規登録</h2>
+    
+    <form action="G10-process.php" method="POST" id="signup-form">
 
-  <!-- 名前 ① -->
-  <div class="input-box">
-    <label>名前</label>
-    <input type="text" placeholder="例：山田　タロウ">
-  </div>
+        <!-- エラーメッセージの表示 -->
+        <?php if ($error_message): ?>
+            <p class="message"><?php echo htmlspecialchars($error_message); ?></p>
+        <?php endif; ?>
 
-  <!-- メール -->
-  <div class="input-box">
-    <label>メールアドレス</label>
-    <input type="email" placeholder="例：@example.com">
-  </div>
+        <!-- 名前 ① -->
+        <div class="input-box">
+            <label>名前</label>
+            <input type="text" name="name" placeholder="例：山田　タロウ" required>
+        </div>
 
-  <!-- パスワード ② -->
-  <div class="input-box">
-    <label>パスワード</label>
-    <input type="password" placeholder="OOOOOOOO">
-  </div>
+        <!-- メール -->
+        <div class="input-box">
+            <label>メールアドレス</label>
+            <input type="email" name="email" placeholder="例：@example.com" required>
+        </div>
 
-  <!-- 住所 -->
-  <div class="input-box">
-    <label>住所</label>
-    <input type="text" placeholder="例：東京都中央区日本橋1-2-3">
-  </div>
+        <!-- パスワード ② -->
+        <div class="input-box">
+            <label>パスワード</label>
+            <input type="password" name="password" placeholder="8文字以上" required>
+        </div>
 
-  <!-- 郵便番号 ③ -->
-  <div class="input-box">
-    <label>郵便番号</label>
-    <input type="text" placeholder="例：1234-56">
-  </div>
+        <!-- 住所 -->
+        <div class="input-box">
+            <label>住所</label>
+            <input type="text" name="address" placeholder="例：東京都中央区日本橋1-2-3" required>
+        </div>
 
-  <!-- 利用規約チェック ④ -->
-  <div class="terms">
-    会員登録には、<a href="./G11.php">利用規約</a>への同意が必要です。
-  </div>
+        <!-- 郵便番号 ③ -->
+        <div class="input-box">
+            <label>郵便番号</label>
+            <input type="text" name="postal_code" placeholder="例：123-4567" required>
+        </div>
 
-  <div class="agree-area">
-    <input type="checkbox" id="agree">
-    <label for="agree">同意して作成</label>
-  </div>
+        <!-- 利用規約チェック ④ -->
+        <div class="terms">
+            会員登録には、<a href="./G11.php" target="_blank">利用規約</a>への同意が必要です。
+        </div>
 
-  <button class="create-btn">同意して作成</button>
+        <div class="agree-area">
+            <input type="checkbox" name="agree" id="agree-checkbox" value="1">
+            <label for="agree-checkbox">同意して作成</label>
+        </div>
+
+        <button type="submit" class="create-btn" id="create-btn" disabled>同意して作成</button>
+        
+    </form>
+    
+</div>
+
+<!-- JavaScript (同意チェックでボタンを有効化) -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const agreeCheckbox = document.getElementById('agree-checkbox');
+    const createButton = document.getElementById('create-btn');
+
+    // チェックボックスの状態が変わったときに実行
+    agreeCheckbox.addEventListener('input', () => {
+        // チェックされていれば disabled を解除、されていなければ disabled にする
+        if (agreeCheckbox.checked) {
+            createButton.disabled = false;
+        } else {
+            createButton.disabled = true;
+        }
+    });
+});
+</script>
+
 </body>
 </html>
