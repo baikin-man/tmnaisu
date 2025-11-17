@@ -48,6 +48,19 @@ session_start();?>
                     </ul>
                 </div>
             </div>
+            
+<div class="genre-box">
+    <a href="#mens" class="genre">メンズ</a>
+    <a href="#ladies" class="genre">レディース</a>
+    <a href="#kids" class="genre">キッズ</a>
+    <a href="#tops" class="genre">トップス</a>
+    <a href="#bottoms" class="genre">ボトムス</a>
+    <a href="#shirt" class="genre">シャツ</a>
+    <a href="#denim" class="genre">デニム</a>
+    <a href="#denim-pants" class="genre">デニムパンツ</a>
+    <a href="#denim-jacket" class="genre">デニムジャケット</a>
+</div>
+
 
             <div class='content3'>
                 <div class='pop'>
