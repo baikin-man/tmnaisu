@@ -48,7 +48,7 @@ session_start();?>
                     </ul>
                 </div>
             </div>
-            
+
 <div class="genre-box">
     <a href="#mens" class="genre">メンズ</a>
     <a href="#ladies" class="genre">レディース</a>
@@ -60,6 +60,8 @@ session_start();?>
     <a href="#denim-pants" class="genre">デニムパンツ</a>
     <a href="#denim-jacket" class="genre">デニムジャケット</a>
 </div>
+
+
 
 
             <div class='content3'>
