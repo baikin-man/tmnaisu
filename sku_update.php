@@ -91,17 +91,6 @@ if (isset($_FILES['new_sku_image']) && $_FILES['new_sku_image']['error'] === UPL
 // (注: 画像がアップロードされなかった場合 (UPLOAD_ERR_NO_FILE など)、
 //  このifブロックは実行されず、$destination_db は古いパスのまま)
 
-
-// --- 3. データベースを「UPDATE」 ---
-$pdo = new PDO($connect, USER, PASS);
-$sql = $pdo->prepare(
-    'UPDATE item_skus 
-     SET size = ?, color = ?, price = ?, stock_quantity = ?, image_url = ?
-     WHERE id = ?' // id を条件に更新
-);
-
-$sql->execute([$size, $color, $price, $stock, $destination, $sku_id]);
-
 // --- 4. データベースを「UPDATE」 ---
 try {
     $pdo = new PDO($connect, USER, PASS);

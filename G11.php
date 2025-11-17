@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="header2.css"> </head>
 <body>
      <div class="back-button">
-         <a href="./G10.php">戻る</a>
+         <a href="https://aso-2401341.vivian.jp/2025/test/G10.php">戻る</a>
     </div>
 
     <div class="terms-container">

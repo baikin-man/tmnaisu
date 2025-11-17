@@ -82,8 +82,7 @@ $all_tags = $stmt_tags->fetchAll(PDO::FETCH_ASSOC);
     <!-- 共通ヘッダーCSS -->
     <link rel="stylesheet" href="header2.css">
     
-    <!-- ★ 修正: G2.css のパス確認 -->
-    <!-- もし G2.css が 'css' フォルダの中にある場合は './css/G2.css' にしてください -->
+    <!-- ★ G2.css を読み込み (パスは G2.php と G2.css の位置関係で調整してください) -->
     <link rel="stylesheet" href="./css/G2.css"> 
     
     <title>ZeZe | ホーム</title>
@@ -114,107 +113,91 @@ $all_tags = $stmt_tags->fetchAll(PDO::FETCH_ASSOC);
         </div>
 
 
-<div class="main-wrapper">
-    <?php if (!empty($all_tags)): ?>
-    <div class="tag-list-nav">
-        <h4>タグから探す</h4>
-        <div class="tags">
-            <?php foreach ($all_tags as $tag): ?>
-                <a href="G7.php?tag=<?= htmlspecialchars($tag['name']) ?>" class="tag-btn">
-                    <?= htmlspecialchars($tag['name']) ?>
-                </a>
-            <?php endforeach; ?>
-        </div>
-    </div>
-    <?php endif; ?>
+        <!-- ★ 修正: 2カラムレイアウトのラッパー -->
+        <div class="main-wrapper">
+        
+            <!-- ★ 左カラム: タグリスト -->
+            <?php if (!empty($all_tags)): ?>
+            <aside class="tag-list-nav">
+                <h4>タグから探す</h4>
+                <div class="tags">
+                    <?php foreach ($all_tags as $tag): ?>
+                        <a href="G7.php?tag=<?= htmlspecialchars($tag['name']) ?>" class="tag-btn">
+                            <?= htmlspecialchars($tag['name']) ?>
+                        </a>
+                    <?php endforeach; ?>
+                </div>
+            </aside>
+            <?php endif; ?>
+            
+            <!-- ★ 右カラム: 商品コンテンツ -->
+            <main class="product-content">
 
-    <!-- 右側のメインコンテンツは全部ここに入れる -->
-    <div class="main-content">
-        <!-- 人気商品・新着などを全部この中に -->
-    </div>
-</div>
+                <!-- 人気商品エリア -->
+                <h3 class="section-title">Popular Items / 人気商品</h3>
+                <div class="product-grid">
+                    <?php foreach ($pop_items as $item): ?>
+                        <a href="G3.php?id=<?= $item['id'] ?>" class="product-card">
+                            <div class="product-img-wrapper">
+                                <?php if (!empty($item['image'])): ?>
+                                    <img src="<?= htmlspecialchars($item['image']) ?>" alt="<?= htmlspecialchars($item['name']) ?>" class="product-img">
+                                <?php else: ?>
+                                    <span class="no-image-text">No Image</span>
+                                <?php endif; ?>
+                            </div>
+                            <div class="product-info">
+                                <p class="product-name"><?= htmlspecialchars($item['name']) ?></p>
+                                <p class="product-price">¥<?= number_format($item['price']) ?></p>
+                            </div>
+                        </a>
+                    <?php endforeach; ?>
+                </div>
 
-=======
-        <!-- ★ 5. 全タグリスト表示エリア -->
-        <?php if (!empty($all_tags)): ?>
-        <div class="tag-list-nav">
-            <h4>タグから探す</h4>
-            <div class="tags">
-                <?php foreach ($all_tags as $tag): ?>
-                    <a href="G7.php?tag=<?= htmlspecialchars($tag['name']) ?>" class="tag-btn">
-                        <?= htmlspecialchars($tag['name']) ?>
-                    </a>
-                <?php endforeach; ?>
-            </div>
-        </div>
-        <?php endif; ?>
+                <!-- 新着商品エリア -->
+                <h3 class="section-title">New Arrivals / 新着商品</h3>
+                <div class="product-grid">
+                    <?php foreach ($new_items as $item): ?>
+                        <a href="G3.php?id=<?= $item['id'] ?>" class="product-card">
+                            <div class="product-img-wrapper">
+                                <?php if (!empty($item['image'])): ?>
+                                    <img src="<?= htmlspecialchars($item['image']) ?>" alt="<?= htmlspecialchars($item['name']) ?>" class="product-img">
+                                <?php else: ?>
+                                    <span class="no-image-text">No Image</span>
+                                <?php endif; ?>
+                            </div>
+                            <div class="product-info">
+                                <p class="product-name"><?= htmlspecialchars($item['name']) ?></p>
+                                <p class="product-price">¥<?= number_format($item['price']) ?></p>
+                            </div>
+                        </a>
+                    <?php endforeach; ?>
+                </div>
 
-
-        <!-- 人気商品エリア -->
-        <h3 class="section-title">Popular Items / 人気商品</h3>
-        <div class="product-grid">
-            <?php foreach ($pop_items as $item): ?>
-                <a href="G3.php?id=<?= $item['id'] ?>" class="product-card">
-                    <div class="product-img-wrapper">
-                        <?php if (!empty($item['image'])): ?>
-                            <img src="<?= htmlspecialchars($item['image']) ?>" alt="<?= htmlspecialchars($item['name']) ?>" class="product-img">
-                        <?php else: ?>
-                            <span class="no-image-text">No Image</span>
-                        <?php endif; ?>
+                <!-- 閲覧履歴エリア (データがある場合のみ表示) -->
+                <?php if (!empty($history_items)): ?>
+                    <h3 class="section-title">Browsing History / 閲覧履歴</h3>
+                    <div class="product-grid">
+                        <?php foreach ($history_items as $item): ?>
+                            <a href="G3.php?id=<?= $item['id'] ?>" class="product-card">
+                                <div class="product-img-wrapper">
+                                    <?php if (!empty($item['image'])): ?>
+                                        <img src="<?= htmlspecialchars($item['image']) ?>" alt="<?= htmlspecialchars($item['name']) ?>" class="product-img">
+                                    <?php else: ?>
+                                        <span class="no-image-text">No Image</span>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="product-info">
+                                    <p class="product-name"><?= htmlspecialchars($item['name']) ?></p>
+                                    <p class="product-price">¥<?= number_format($item['price']) ?></p>
+                                </div>
+                            </a>
+                        <?php endforeach; ?>
                     </div>
-                    <div class="product-info">
-                        <p class="product-name"><?= htmlspecialchars($item['name']) ?></p>
-                        <!-- item_skusから取得したpriceを表示 -->
-                        <p class="product-price">¥<?= number_format($item['price']) ?></p>
-                    </div>
-                </a>
-            <?php endforeach; ?>
-        </div>
+                <?php endif; ?>
+                
+            </main> <!-- ★ 右カラム 終了 -->
 
-        <!-- 新着商品エリア -->
-        <h3 class="section-title">New Arrivals / 新着商品</h3>
-        <div class="product-grid">
-            <?php foreach ($new_items as $item): ?>
-                <a href="G3.php?id=<?= $item['id'] ?>" class="product-card">
-                    <div class="product-img-wrapper">
-                        <?php if (!empty($item['image'])): ?>
-                            <img src="<?= htmlspecialchars($item['image']) ?>" alt="<?= htmlspecialchars($item['name']) ?>" class="product-img">
-                        <?php else: ?>
-                            <span class="no-image-text">No Image</span>
-                        <?php endif; ?>
-                    </div>
-                    <div class="product-info">
-                        <p class="product-name"><?= htmlspecialchars($item['name']) ?></p>
-                        <p class="product-price">¥<?= number_format($item['price']) ?></p>
-                    </div>
-                </a>
-            <?php endforeach; ?>
-        </div>
-
-        <!-- 閲覧履歴エリア (データがある場合のみ表示) -->
-        <?php if (!empty($history_items)): ?>
-            <h3 class="section-title">Browsing History / 閲覧履歴</h3>
-            <div class="product-grid">
-                <?php foreach ($history_items as $item): ?>
-                    <a href="G3.php?id=<?= $item['id'] ?>" class="product-card">
-                        <div class="product-img-wrapper">
-                            <?php if (!empty($item['image'])): ?>
-                                <img src="<?= htmlspecialchars($item['image']) ?>" alt="<?= htmlspecialchars($item['name']) ?>" class="product-img">
-                            <?php else: ?>
-                                <span class="no-image-text">No Image</span>
-                            <?php endif; ?>
-                        </div>
-                        <div class="product-info">
-                            <p class="product-name"><?= htmlspecialchars($item['name']) ?></p>
-                            <p class="product-price">¥<?= number_format($item['price']) ?></p>
-                        </div>
-
-
-                        
-                    </a>
-                <?php endforeach; ?>
-            </div>
-        <?php endif; ?>
+        </div> <!-- ★ 2カラムラッパー 終了 -->
 
     </div>
 
