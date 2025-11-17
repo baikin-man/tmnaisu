@@ -208,78 +208,34 @@ img { max-width: 100%; height: auto; vertical-align: bottom; }
   align-items: start;
 }
 
-/* タグリストを左カラム用に調整 */
+/* ▼ 全体を2カラムレイアウト化 */
+.main-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+/* ▼ 左側のタグリスト（サイドメニュー） */
 .tag-list-nav {
-  text-align: left;          /* 左寄せに */
-  margin: 0;                 /* 親グリッド内で制御するので余白は0に */
-  padding: 16px;
-  background: #fff;
-  border-radius: 8px;
-  border: 1px solid #eee;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.04);
-  position: sticky;          /* スクロールで追従 */
-  top: calc(var(--header-h,110px) + 16px); /* ヘッダー高さに合わせて調整 */
-  height: fit-content;
+    width: 220px;
+    position: sticky;
+    top: 130px; /* 固定したくない場合は消してOK */
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 20px;
 }
 
-/* タイトルは左寄せ */
-.tag-list-nav h4 {
-  margin: 0 0 12px 0;
-  font-size: 0.95rem;
-}
-
-/* 縦並びにする */
+/* ▼ 中身の縦並び */
 .tag-list-nav .tags {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-/* 四角ボタンを幅いっぱいに */
 .tag-list-nav .tag-btn {
-  display: block;
-  width: 100%;
-  padding: 10px 12px;
-  font-size: 0.95rem;
-  color: #333;
-  background-color: #f7f9fb;
-  border: 1px solid #e6eef9;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all .18s ease;
-  text-align: left; /* テキスト左寄せ */
-}
-
-/* hover / focus */
-.tag-list-nav .tag-btn:hover,
-.tag-list-nav .tag-btn:focus {
-  background-color: #fff;
-  border-color: #d8e9ff;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-  transform: translateY(-2px);
-  outline: none;
-}
-
-/* スマホ等の狭い画面では上に差し替え（1カラム） */
-@media (max-width: 900px) {
-  .content2 {
-    grid-template-columns: 1fr;
-  }
-  .tag-list-nav {
-    position: relative;
-    top: 0;
-    margin-bottom: 16px;
-  }
-  .tag-list-nav .tags {
-    flex-direction: row;
-    gap: 8px;
-    overflow-x: auto;
-  }
-  .tag-list-nav .tag-btn {
-    white-space: nowrap;
-    flex: 0 0 auto;
-    width: auto;
-    border-radius: 20px;
-  }
+    padding: 8px 10px;
+    background: #f3f3f3;
+    border-radius: 6px;
+    width: 100%;
 }
