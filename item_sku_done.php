@@ -7,7 +7,8 @@ require "db-connect.php";
 if (
     !isset($_POST['item_id']) || trim($_POST['item_id']) === '' ||
     !isset($_POST['size']) || trim($_POST['size']) === '' ||
-    !isset($_POST['color']) || trim($_POST['color']) === '' ||
+    !isset($_POST['color_name']) || trim($_POST['color_name']) === '' || // ★ 'color' から 'color_name' に変更
+    !isset($_POST['color_code']) || trim($_POST['color_code']) === '' || // ★ 'color_code' を追加
     !isset($_POST['price']) || trim($_POST['price']) === '' ||
     !isset($_POST['stock']) || trim($_POST['stock']) === '' ||
     !isset($_FILES['sku_image']) ||
@@ -19,13 +20,14 @@ if (
 // --- 2. POSTデータを変数に格納 ---
 $item_id = $_POST['item_id'];
 $size = $_POST['size'];
-$color = $_POST['color'];
+$color_name = $_POST['color_name']; // ★ 'color' から 'color_name' に変更
+$color_code = $_POST['color_code']; // ★ 'color_code' を追加
 $price = $_POST['price'];
 $stock = $_POST['stock'];
 
 // --- 3. 画像ファイルの処理 ---
 
-// ★ パスを2種類定義する
+// ★ パスを2種類定義する (ご提示いただいたパスを採用)
 $upload_dir_server = './image/skus/'; // サーバーがファイルを保存する場所 (./ が必要)
 $upload_dir_db = 'image/skus/';     // データベースに保存するパス (./ を除く)
 
@@ -41,7 +43,7 @@ $file_size = $_FILES['sku_image']['size'];
 $extension = pathinfo($file_name, PATHINFO_EXTENSION);
 $file_ext_lower = strtolower($extension);
 
-// --- 4. ★ ファイルのセキュリティチェック ---
+// --- 4. ★ ファイルのセキュリティチェック (ご提示いただいたロジックを採用) ---
 
 // (4-1) 許可する拡張子かチェック
 $allowed_exts = ['jpg', 'jpeg', 'png', 'gif'];
@@ -94,13 +96,23 @@ try {
     // エラーモードを例外に設定
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+    // ★ 修正: INSERT文に color (色名) と color_code (CSSコード) を追加
     $sql = $pdo->prepare(
-        'INSERT INTO item_skus (item_id, size, color, price, stock_quantity, image_url, status) 
-         VALUES (?, ?, ?, ?, ?, ?, ?)'
+        'INSERT INTO item_skus (item_id, size, color, color_code, price, stock_quantity, image_url, status) 
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
     );
     
-    // ★ DBには ./ が無い方のパス ($destination_db) を保存
-    $sql->execute([$item_id, $size, $color, $price, $stock, $destination_db, $status_to_insert]);
+    // ★ 修正: DBには ./ が無い方のパス ($destination_db) と、色名・色コードを保存
+    $sql->execute([
+        $item_id, 
+        $size, 
+        $color_name,  // ★ color カラムに 色名 を保存
+        $color_code,  // ★ color_code カラムに CSSコード を保存
+        $price, 
+        $stock, 
+        $destination_db, 
+        $status_to_insert
+    ]);
 
 } catch (PDOException $e) {
     // ★ DB登録に失敗した場合の処理
@@ -116,13 +128,9 @@ try {
 }
 
 // --- 7. 処理完了後、元の登録画面（または一覧）にリダイレクト ---
-// ※このファイルは処理専用なので、完了したら画面を移動させます
 
-// ★ item_id を指定して、今登録した商品SKUの画面に戻る（前の画面で使っていたURLに合わせてください）
+// ★ item_id を指定して、今登録した商品SKUの画面に戻る
 $redirect_url = "item_sku_register.php?item_id=" . $item_id;
-
-// もし一覧画面に戻すなら
-// $redirect_url = "item_list.php"; 
 
 header("Location: " . $redirect_url);
 exit; // リダイレクト後は必ず exit を実行する

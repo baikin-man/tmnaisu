@@ -1,3 +1,4 @@
+
 /* レイアウト：左サイド + 右メイン */
 .content2 {
   display: grid;
@@ -102,4 +103,158 @@
 .item-section {
     scroll-margin-top: 140px; /* 固定ヘッダーの高さ分ずらす */
     padding-top: 30px;
+}
+=======
+/* リセット・基本設定 */
+* { box-sizing: border-box; }
+body {
+    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding-top: 115px; /* header2.cssの高さに合わせる */
+    padding-top: 115px;
+}
+
+a { text-decoration: none; color: inherit; transition: 0.3s; }
+a:hover { opacity: 0.7; }
+img { max-width: 100%; height: auto; vertical-align: bottom; }
+
+/* コンテナ */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 40px;
+}
+
+/* ヒーローバナー */
+.banner {
+    width: 100%;
+    height: 350px;
+    background-image: url('img/banner_sample.jpg'); /* 背景画像 */
+    background-size: cover;
+    background-position: center;
+    background-color: #ddd; /* 画像がない時のフォールバック */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+    border-radius: 8px;
+    position: relative;
+}
+.banner h2 {
+    color: #fff;
+    font-size: 2.5rem;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.3);
+    padding: 10px 20px;
+}
+
+/* カテゴリナビゲーション (Mens/Ladies/Kids) */
+.category-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 60px;
+}
+.cat-btn {
+    flex: 1;
+    height: 150px;
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.cat-btn span { position: relative; z-index: 2; }
+/* 各ボタンの背景色を変える場合 */
+.cat-btn.mens { background: linear-gradient(45deg, #2c3e50, #3498db); }
+.cat-btn.ladies { background: linear-gradient(45deg, #c0392b, #e74c3c); }
+.cat-btn.kids { background: linear-gradient(45deg, #f39c12, #f1c40f); }
+
+/* セクション見出し */
+.section-title {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    position: relative;
+    padding-bottom: 10px;
+}
+.section-title::after {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: #333;
+    margin: 10px auto 0;
+}
+
+/* 商品グリッド */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+    margin-bottom: 60px;
+}
+.product-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+.product-img-wrapper {
+    width: 100%;
+    height: 220px;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.no-image-text {
+    color: #aaa;
+    font-size: 0.8rem;
+}
+.product-info {
+    padding: 15px;
+}
+.product-name {
+    font-size: 1rem;
+    margin: 0 0 8px;
+    line-height: 1.4;
+    height: 2.8em; /* 2行制限 */
+    overflow: hidden;
+}
+.product-price {
+    font-weight: bold;
+    color: #e74c3c;
+    font-size: 1.1rem;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .category-nav {
+        flex-direction: column;
+    }
+    .cat-btn {
+        height: 100px;
+    }
+    .banner {
+        height: 200px;
+    }
 }

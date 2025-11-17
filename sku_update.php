@@ -9,6 +9,7 @@ if (
     !isset($_POST['color']) ||
     !isset($_POST['price']) ||
     !isset($_POST['stock']) ||
+    !isset($_POST['status']) || // ★追加: ステータスのチェック
     !isset($_POST['current_image_path'])
 ) {
     die("必須情報が不足しています。");
@@ -20,13 +21,19 @@ $size = $_POST['size'];
 $color = $_POST['color'];
 $price = $_POST['price'];
 $stock = $_POST['stock'];
+$status = $_POST['status']; // ★追加: ステータスを変数に格納
 $destination = $_POST['current_image_path']; // デフォルトは現在の画像パス
 
 // --- 2. ★画像が「新しく」アップロードされたかチェック ---
-// (ファイルがアップロードされていて、エラーがない場合)
 if (isset($_FILES['new_sku_image']) && $_FILES['new_sku_image']['error'] === UPLOAD_ERR_OK) {
     
     $upload_dir = './image/skus/'; // ★保存先フォルダ
+    
+    // フォルダが存在しない場合は作成する（念のため追加）
+    if (!is_dir($upload_dir)) {
+        mkdir($upload_dir, 0755, true);
+    }
+
     $tmp_path = $_FILES['new_sku_image']['tmp_name'];
     $extension = pathinfo($_FILES['new_sku_image']['name'], PATHINFO_EXTENSION);
     $new_filename = 'sku_' . uniqid() . '.' . $extension;
@@ -46,15 +53,24 @@ if (isset($_FILES['new_sku_image']) && $_FILES['new_sku_image']['error'] === UPL
 // (注: 新しい画像がアップロードされなかった場合、$destination はPOSTされた古いパスのまま)
 
 // --- 3. データベースを「UPDATE」 ---
-$pdo = new PDO($connect, USER, PASS);
-$sql = $pdo->prepare(
-    'UPDATE item_skus 
-     SET size = ?, color = ?, price = ?, stock_quantity = ?, image_url = ?
-     WHERE id = ?' // id を条件に更新
-);
+try {
+    $pdo = new PDO($connect, USER, PASS);
+    // エラー発生時に例外を投げる設定（デバッグしやすくするため）
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$sql->execute([$size, $color, $price, $stock, $destination, $sku_id]);
+    $sql = $pdo->prepare(
+        'UPDATE item_skus 
+         SET size = ?, color = ?, price = ?, stock_quantity = ?, status = ?, image_url = ?
+         WHERE id = ?'
+    );
 
+    // ★追加: $status をパラメータに含める (順番に注意: size, color, price, stock, status, image_url, id)
+    $sql->execute([$size, $color, $price, $stock, $status, $destination, $sku_id]);
+
+} catch (PDOException $e) {
+    // エラー時の処理
+    die("DBエラー: " . $e->getMessage());
+}
 
 // --- 4. ★重要★ SKU一覧/登録ページにリダイレクト ---
 // 編集が終わったら、その商品が載っている「SKU登録ページ」に戻すのが親切
