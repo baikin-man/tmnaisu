@@ -1,7 +1,6 @@
 body {
   font-family: "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
   background-color: #fff;
-  padding-top: 115px;
 }
 
 .container {
@@ -80,47 +79,4 @@ h2 {
 .continue-btn:hover {
   background-color: #f2f2f2;
   transform: translateY(-2px);
-}
-
-/* G4.css に追加 */
-
-/* カートの各商品のコンテナ */
-.cart-item {
-    display: flex; /* 画像、詳細、削除ボタンを横並びにする */
-    align-items: center; /* 上下中央揃え */
-    border-bottom: 1px solid #eee;
-    padding: 15px 0;
-    gap: 20px; /* 要素間の隙間 */
-}
-
-/* 画像を囲むコンテナ */
-.cart-item-image {
-    width: 100px;  /* 画像コンテナの幅を固定 */
-    height: 100px; /* 画像コンテナの高さを固定 */
-    flex-shrink: 0; /* コンテナが縮まないようにする */
-}
-
-/* ▼▼▼ この設定が一番重要です ▼▼▼ */
-/* 画像自体への設定 */
-.cart-item-image img {
-    width: 100%;  /* 親コンテナ(100px)いっぱいに広げる */
-    height: 100%; /* 親コンテナ(100px)いっぱいに広げる */
-    
-    /* * 縦横比を保ったまま、枠内に収まるように切り抜く
-     * (contain にすると隙間ができます)
-     */
-    object-fit: cover; 
-}
-
-/* 商品詳細（商品名など） */
-.cart-item-details {
-    flex-grow: 1; /* 残りのスペースをすべて使う */
-}
-
-/* 数量や削除ボタン */
-.cart-item-quantity,
-.cart-item-total,
-.cart-item-delete {
-    flex-shrink: 0; /* 縮まないようにする */
-    margin: 0 10px;
 }

@@ -1,86 +1,87 @@
-<?php session_start(); ?>
-<?php require 'db-connect.php'; ?>
-<?php
-// --- 1. ログインチェック ---
-if (!isset($_SESSION['user_id'])) {
-    header('Location: G1.php');
-    exit;
-}
-
-// --- 2. 人気商品（おすすめ商品）を取得 ---
-$popular_items = [];
-try {
-    $pdo = new PDO($connect, USER, PASS);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    $sql_popular = "
-        SELECT
-            h.item_id,
-            COUNT(h.item_id) AS view_count,
-            i.name AS item_name,
-            (SELECT s.price FROM item_skus s WHERE s.item_id = h.item_id AND s.status = 2 ORDER BY s.id ASC LIMIT 1) AS price,
-            (SELECT s.image_url FROM item_skus s WHERE s.item_id = h.item_id AND s.status = 2 ORDER BY s.id ASC LIMIT 1) AS image_url
-        FROM
-            item_view_history h
-        JOIN
-            items i ON h.item_id = i.id
-        GROUP BY
-            h.item_id, i.name
-        HAVING
-            price IS NOT NULL AND image_url IS NOT NULL
-        ORDER BY
-            view_count DESC
-        LIMIT 4
-    ";
-
-    $stmt_popular = $pdo->prepare($sql_popular);
-    $stmt_popular->execute();
-    $popular_items = $stmt_popular->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    // (エラーが起きてもサンキューページは表示する)
-}
-?>
+<?php session_start();?>
+<?php require 'db-connect.php';?>
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/header2.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <title>ZeZe</title>
 
     <title>購入確定画面 | ZeZe</title>
-
-    <!-- ★ 外部CSSの読み込み ★ -->
-    <link rel="stylesheet" href="header2.css"> <!-- ヘッダーCSS -->
-    <link rel="stylesheet" href="./css/G9.css"> <!-- このページ専用CSS -->
-
-    <!-- ★ 固定ヘッダー用の余白 ★ -->
     <style>
         body {
-            padding-top: 115px;
+            font-family: "Yu Gothic", sans-serif;
+            background: #f8f8f8;
+            text-align: center;
+            margin: 0;
+            padding: 30px;
+        }
+        .complete-box {
+            border: 3px solid #000;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px auto;
+            width: 300px;
+            background: #fff;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .btn-continue {
+            display: inline-block;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 10px 20px;
+            margin-top: 20px;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+        .btn-continue:hover {
+            background: #f0f0f0;
+        }
+        .recommend-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 40px 0 20px;
+        }
+        .product-list {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .product {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            padding: 10px;
+            width: 120px;
+        }
+        .product img {
+            width: 100%;
+            border-radius: 5px;
+        }
+        .price {
+            margin-top: 5px;
+            font-weight: bold;
         }
     </style>
 </head>
-
 <body>
-    <?php require 'header2.php'; ?>
-
+    <!-- ① 購入完了表示 -->
+    <?php require 'header2.php';?>
     <div class="complete-box">
         購入が確定しました
     </div>
 
-    <a href="G2.php" class="btn-continue">買い物を続ける</a>
+    <!-- ② 買い物を続けるボタン -->
+    <button class="btn-continue" onclick="location.href='G2.php'">買い物を続ける</button>
 
+    <!-- ③～⑤ おすすめ商品表示 -->
     <div class="recommend-title">おすすめの商品はこちら</div>
-
-    <div class="product-list">
-        <?php foreach ($popular_items as $item): ?>
-            <a href="G3.php?id=<?php echo $item['item_id']; ?>" class="product">
-                <img src="<?php echo htmlspecialchars($item['image_url']); ?>" alt="<?php echo htmlspecialchars($item['item_name']); ?>">
-                <div class="price"><?php echo htmlspecialchars($item['item_name']); ?></div>
-            </a>
-        <?php endforeach; ?>
+ 
     </div>
 </body>
-
 </html>

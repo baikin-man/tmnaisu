@@ -1,27 +1,25 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>住所変更フォーム</title>
   <link rel="stylesheet" href="./css/G6.css">
-  <link rel="stylesheet" href="./css/header1.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-  <style>
-    body {
-      padding-top: 115px;
-    }
-  </style>
-</head>
-<?php require 'header1.php'; ?>
 
+=======
+  <link rel="stylesheet" href="./css/header1.css">
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+</head>
+      <?php require 'header1.php';?>
 <body>
+=======
+    <?php require 'header2.php';?>
 
   <div class="container">
     <h2>住所変更</h2>
     <form method="post" action="address-update.php">
-
+      
       <label>姓<br>
         <input type="text" name="sei">
       </label>
@@ -83,5 +81,4 @@
     });
   </script>
 </body>
-
 </html>

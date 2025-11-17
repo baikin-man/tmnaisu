@@ -113,6 +113,28 @@ $all_tags = $stmt_tags->fetchAll(PDO::FETCH_ASSOC);
             </a>
         </div>
 
+
+<div class="main-wrapper">
+    <?php if (!empty($all_tags)): ?>
+    <div class="tag-list-nav">
+        <h4>タグから探す</h4>
+        <div class="tags">
+            <?php foreach ($all_tags as $tag): ?>
+                <a href="G7.php?tag=<?= htmlspecialchars($tag['name']) ?>" class="tag-btn">
+                    <?= htmlspecialchars($tag['name']) ?>
+                </a>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <?php endif; ?>
+
+    <!-- 右側のメインコンテンツは全部ここに入れる -->
+    <div class="main-content">
+        <!-- 人気商品・新着などを全部この中に -->
+    </div>
+</div>
+
+=======
         <!-- ★ 5. 全タグリスト表示エリア -->
         <?php if (!empty($all_tags)): ?>
         <div class="tag-list-nav">
@@ -186,6 +208,9 @@ $all_tags = $stmt_tags->fetchAll(PDO::FETCH_ASSOC);
                             <p class="product-name"><?= htmlspecialchars($item['name']) ?></p>
                             <p class="product-price">¥<?= number_format($item['price']) ?></p>
                         </div>
+
+
+                        
                     </a>
                 <?php endforeach; ?>
             </div>

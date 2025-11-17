@@ -1,4 +1,3 @@
-<?php require "db-connect.php";?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -9,22 +8,26 @@
     <style>
         body { 
             font-family: sans-serif; 
-            background-color: #f4f4f4; 
+            background-color: #f4f4f4; /* 背景色を少しグレーに */
             padding-top: 20px;
         }
+        
+        /* item_list.php の .item-box スタイルを参考に */
         .register-box {
-            border: 2px solid #007bff; 
+            border: 2px solid #007bff; /* 青い枠線 */
             border-radius: 8px;
             margin: 20px auto;
-            padding: 0; 
+            padding: 0; /* 内側のパディングは0に */
             width: 90%;
-            max-width: 500px; 
+            max-width: 500px; /* 最大幅を指定 */
             background-color: #fff;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            overflow: hidden; 
+            overflow: hidden; /* ヘッダーの角を丸めるため */
         }
+        
+        /* item_list.php の .item-header スタイルを参考に */
         .register-header {
-            background: #f0f8ff; 
+            background: #f0f8ff; /* 薄い青色のヘッダー */
             padding: 12px 15px;
         }
         .register-header h2 {
@@ -32,79 +35,34 @@
             font-size: 1.2rem;
             color: #333;
         }
+
         form {
-            padding: 20px; 
-            display: flex; 
-            flex-direction: column; /* 縦並びに変更 */
-            gap: 15px; 
+            padding: 20px; /* フォーム自体にパディング */
+            display: flex; /* Flexboxで横並び */
+            gap: 10px; /* 要素間の隙間 */
         }
-        .input-group {
-            display: flex;
-            gap: 10px;
-        }
+
         input[type="text"] {
-            flex-grow: 1; 
+            flex-grow: 1; /* 残りのスペースをすべて使う */
             padding: 10px;
             font-size: 1rem;
             border: 1px solid #ccc;
             border-radius: 5px;
         }
+
         button {
-            padding: 12px 15px;
+            padding: 10px 15px;
             font-size: 1rem;
             font-weight: bold;
             color: #fff;
-            background-color: #007bff; 
+            background-color: #007bff; /* メインの青色 */
             border: none;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.2s;
         }
         button:hover {
-            background-color: #0056b3; 
-        }
-
-        /* タグ選択エリアのスタイル */
-        .tag-label-title {
-            font-weight: bold;
-            font-size: 0.9rem;
-            margin-bottom: 5px;
-            color: #555;
-        }
-        .tag-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            padding: 10px;
-            background-color: #fafafa;
-            border: 1px solid #eee;
-            border-radius: 5px;
-        }
-        .tag-label {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            font-size: 0.9rem;
-            background: #fff;
-            padding: 6px 10px;
-            border: 1px solid #ccc;
-            border-radius: 20px;
-            transition: 0.2s;
-            user-select: none;
-        }
-        .tag-label:hover {
-            background: #e9ecef;
-        }
-        /* チェックボックスは見えなくても良いが、今回は残す */
-        .tag-label input {
-            margin-right: 5px;
-            transform: scale(1.1);
-        }
-        /* チェックされた時のスタイル */
-        .tag-label:has(input:checked) {
-            background-color: #e7f1ff;
-            border-color: #007bff;
-            color: #0056b3;
+            background-color: #0056b3; /* ホバーで少し濃く */
         }
     </style>
 </head>
@@ -117,42 +75,8 @@
         </div>
         
         <form action="item_sku_register.php" method="post">
-            <!-- 商品名入力 -->
-            <div>
-                <div class="tag-label-title">商品名</div>
-                <div class="input-group">
-                    <input type="text" name="name" placeholder="例: ロゴTシャツ" required>
-                </div>
-            </div>
-
-            <!-- タグ選択 -->
-            <div>
-                <div class="tag-label-title">タグ選択 (複数選択可)</div>
-                <div class="tag-container">
-                    <?php
-                    try {
-                        $pdo = new PDO($connect, USER, PASS);
-                        // タグ一覧を取得
-                        $tags = $pdo->query("SELECT * FROM tags ORDER BY id ASC");
-                        
-                        if ($tags->rowCount() > 0) {
-                            foreach ($tags as $tag) {
-                                echo '<label class="tag-label">';
-                                echo '<input type="checkbox" name="tags[]" value="' . $tag['id'] . '">';
-                                echo htmlspecialchars($tag['name']);
-                                echo '</label>';
-                            }
-                        } else {
-                            echo '<p style="font-size:0.8rem; color:#888;">タグが登録されていません</p>';
-                        }
-                    } catch (PDOException $e) {
-                        echo "DBエラー: " . $e->getMessage();
-                    }
-                    ?>
-                </div>
-            </div>
-
-            <button type="submit">商品を登録して次へ</button>
+            <input type="text" name="name" placeholder="商品名を入力 (例: ロゴTシャツ)">
+            <button type="submit">商品を登録</button>
         </form>
         
     </div>

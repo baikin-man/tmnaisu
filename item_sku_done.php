@@ -4,6 +4,16 @@ require "db-connect.php";
 // (このファイル内で $connect, USER, PASS が定義されている前提)
 
 // --- 1. POSTデータとファイルの必須チェック ---
+if (
+    !isset($_POST['item_id']) || trim($_POST['item_id']) === '' ||
+    !isset($_POST['size']) || trim($_POST['size']) === '' ||
+    !isset($_POST['color']) || trim($_POST['color']) === '' ||
+    !isset($_POST['price']) || trim($_POST['price']) === '' ||
+    !isset($_POST['stock']) || trim($_POST['stock']) === '' ||
+    !isset($_FILES['sku_image']) ||
+    $_FILES['sku_image']['error'] !== UPLOAD_ERR_OK
+) {
+    die("必須情報が不足しているか、ファイルアップロードエラーです。");
 $errors = []; // エラーメッセージ格納用配列
 
 // (1-1) POST項目のチェック
@@ -72,6 +82,9 @@ if (!empty($errors)) {
 // (エラーチェックを通過したので、ここは変更なし)
 $item_id = $_POST['item_id'];
 $size = $_POST['size'];
+
+$color = $_POST['color'];
+
 $color_name = $_POST['color_name']; 
 $color_code = $_POST['color_code']; 
 $price = $_POST['price'];
@@ -81,6 +94,13 @@ $stock = $_POST['stock'];
 // (変更なし)
 $upload_dir_server = './image/skus/'; 
 $upload_dir_db = 'image/skus/';     
+
+
+// ★ パスを2種類定義する
+$upload_dir_server = './image/skus/'; // サーバーがファイルを保存する場所 (./ が必要)
+$upload_dir_db = 'image/skus/';     // データベースに保存するパス (./ を除く)
+
+// フォルダが存在しない場合は作成 (初回実行時など)
 
 if (!is_dir($upload_dir_server)) {
     mkdir($upload_dir_server, 0755, true);
@@ -93,7 +113,7 @@ $extension = pathinfo($file_name, PATHINFO_EXTENSION);
 $file_ext_lower = strtolower($extension);
 
 // --- 4. ★ ファイルのセキュリティチェック ---
-// (変更なし)
+
 $allowed_exts = ['jpg', 'jpeg', 'png', 'gif'];
 if (!in_array($file_ext_lower, $allowed_exts)) {
     die("許可されていないファイル形式です。(許可: jpg, jpeg, png, gif)");
@@ -132,10 +152,11 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $sql = $pdo->prepare(
-        'INSERT INTO item_skus (item_id, size, color, color_code, price, stock_quantity, image_url, status) 
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
+        'INSERT INTO item_skus (item_id, size, color, price, stock_quantity, image_url, status) 
+         VALUES (?, ?, ?, ?, ?, ?, ?)'
     );
     
+
     $sql->execute([
         $item_id, 
         $size, 
@@ -147,6 +168,7 @@ try {
         $status_to_insert
     ]);
 
+
 } catch (PDOException $e) {
     if (file_exists($destination_server)) {
         unlink($destination_server);
@@ -156,8 +178,18 @@ try {
 }
 
 // --- 7. 処理完了後、元の登録画面（または一覧）にリダイレクト ---
+
+// ※このファイルは処理専用なので、完了したら画面を移動させます
+
+// ★ item_id を指定して、今登録した商品SKUの画面に戻る（前の画面で使っていたURLに合わせてください）
+$redirect_url = "item_sku_register.php?item_id=" . $item_id;
+
+// もし一覧画面に戻すなら
+// $redirect_url = "item_list.php"; 
+
 // (変更なし)
 $redirect_url = "item_sku_register.php?item_id=" . $item_id;
+
 header("Location: " . $redirect_url);
 exit; 
 ?>

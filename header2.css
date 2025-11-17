@@ -1,189 +1,166 @@
-/* ヘッダー全体を固定する */
-.kotei {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 100;
-    /* ヘッダーの実際の高さに合わせて調整してください */
-    /* 例: h1が75px, 上下paddingが 20px * 2 = 40px なら 合計 115px */
-    min-height: 115px; 
-    /* 背景色を .kotei に移動（headerから） */
-    background-color: #696969;
-}
-
-
-/* !!! 注意 !!!
-   .kotei を固定したため、呼び出し元のページ (G1.php, G3.phpなど) の
-   <head>内に <style> body { padding-top: 115px; } </style>
-   を追加する必要があります。
-*/
-
-
 header {
-    display: flex;
-    /* background-color: #696969;  <-- .kotei に移動済み */
-    justify-content: flex-start;
-    align-items: center;
-    position: relative; 
-    /* .kotei が高さを管理するので、headerの高さは自動に */
+  display: flex;
+  background-color: #696969;
+  justify-content: flex-start;
+  align-items: center;
 }
-
-h1 {
-    color: white;
-    font-size: 75px;
-    /* h1のデフォルトマージンをリセットし、高さを安定させる */
-    margin-top: 20px;
-    margin-bottom: 20px;
+h1{
+  color: white;
+  font-size: 75px;
 }
 
 .header h1 a {
-    color: inherit;
-    text-decoration: none;
+  color: inherit;       /* h1の色を引き継ぐ */
+  text-decoration: none; /* 下線を消す */
 }
 
 .header h1 a:hover {
-    opacity: 0.8;
+  opacity: 0.8;         /* ホバー時の軽いエフェクト */
 }
 
-#left {
-    margin: 0 200px;
+
+
+#left{
+  margin: 0 200px;
 }
+
 
 /* ハンバーガーメニューのスタイル */
 .menu-wrapper {
-    /* このラッパーはアイコンの位置決めに専念 */
+  position: fixed;
 }
 
 .menu-icon {
-    width: 50px;
-    height: 50px;
-    position: fixed; /* 常に左上固定 */
-    top: 45px;
-    left: 20px;
-    cursor: pointer;
-    z-index: 103; /* メニュー本体(102)やオーバーレイ(101)より上 */
-    display: inline-block;
+  width: 50px;
+  height: 50px;
+  position: fixed; /* ← fixedにして常に左上固定 */
+  top: 45px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 3;
+  display: inline-block;
 }
 
 .menu-icon span {
-    display: block;
-    height: 4px;
-    margin: 6px 0;
-    background: gainsboro;
-    border-radius: 2px;
-    transition: 0.4s;
+  display: block;
+  height: 4px;
+  margin: 6px 0;
+  background: gainsboro;
+  border-radius: 2px;
+  transition: 0.4s;
 }
 
 /* ハンバーガーがXに変形 */
-#menu-toggle:checked + .menu-wrapper .menu-icon span:nth-child(1) {
-    transform: translateY(10px) rotate(45deg);
+#menu-toggle:checked + .menu-icon span:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
 }
-#menu-toggle:checked + .menu-wrapper .menu-icon span:nth-child(2) {
-    opacity: 0;
+#menu-toggle:checked + .menu-icon span:nth-child(2) {
+  opacity: 0;
 }
-#menu-toggle:checked + .menu-wrapper .menu-icon span:nth-child(3) {
-    transform: translateY(-10px) rotate(-45deg);
+#menu-toggle:checked + .menu-icon span:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
 }
 
 /* オーバーレイ背景 */
 .overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    opacity: 0;
-    pointer-events: none;
-    transition: 0.4s;
-    z-index: 101; /* ヘッダー(100)より上、メニュー(102)より下 */
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
+  z-index: 1;
 }
 
 #menu-toggle:checked ~ .overlay {
-    opacity: 1;
-    pointer-events: auto;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* メニュー本体（左から出す） */
 .menu {
-    position: fixed;
-    top: 0;
-    left: -300px; /* 初期位置を左へ */
-    width: 300px;
-    height: 100%;
-    background: white;
-    box-shadow: 2px 0 8px rgba(0,0,0,0.2);
-    transition: left 0.4s ease;
-    z-index: 102; /* オーバーレイ(101)より上、アイコン(103)より下 */
+  position: fixed;
+  top: 0;
+  left: -300px; /* ← 初期位置を左へ */
+  width: 300px;
+  height: 100%;
+  background: white;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+  transition: left 0.4s ease;
+  z-index: 2;
 }
 
 #menu-toggle:checked ~ .menu {
-    left: 0; /* 開いたときは左0へ */
+  left: 0; /* ← 開いたときは左0へ */
 }
 
 .menu ul {
-    list-style: none;
-    padding: 60px 20px;
+  list-style: none;
+  padding: 60px 20px;
 }
 
 .menu li {
-    margin: 20px 0;
+  margin: 20px 0;
 }
 
 .menu a {
-    text-decoration: none;
-    color: #333;
-    font-size: 1.2rem;
-    transition: color 0.3s;
+  text-decoration: none;
+  color: #333;
+  font-size: 1.2rem;
+  transition: color 0.3s;
 }
 
 .menu a:hover {
-    color: #007bff;
+  color: #007bff;
 }
 
-/* カートアイコン */
+/*　カートアイコン　*/
+/* cartアイコンの位置や色を変更 */
 #cart-icon {
-    font-size: 50px;
-    color: whitesmoke;
-    position: absolute;
-    top: 40px;
-    right: 40px;
-    cursor: pointer;
-    transition: 0.3s;
+  font-size: 50px;     /* アイコンサイズ */
+  color: whitesmoke;         /* 色 */
+  position: absolute;  /* 位置指定（ヘッダー右上などに） */
+  top: 40px;
+  right: 40px;
+  cursor: pointer;     /* ホバーでクリック感を出す */
+  transition: 0.3s;    /* アニメーション */
 }
 
+/* ホバー時の色変更 */
 #cart-icon:hover {
-    color: gray;
-    transform: scale(1.1);
+  color: gray;
+  transform: scale(1.1);  /* ちょっと拡大 */
 }
 
 /* 検索欄 */
 .search-box {
-    position: relative;
-    display: inline-block;
-    left: 70px;
+  position: relative;
+  display: inline-block;
+  left: 70px;
 }
 
 .search-box input[type="text"] {
-    width: 350px;
-    height: 40px;
-    border: none;
-    border-radius: 20px;
-    padding: 0 40px 0 15px;
-    font-size: 16px;
-    outline: none;
+  width: 350px;             /* 横幅 */
+  height: 40px;             /* 高さ */
+  border: none;              /* 枠線なし */ 
+  border-radius: 20px;      /* 丸みをつける */
+  padding: 0 40px 0 15px;   /* 右にボタン分の余白 */
+  font-size: 16px;
+  outline: none;          /* フォーカス時の枠線を消す */
 }
 
 .search-box .search-btn {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #666;
-    font-size: 18px;
+  position: absolute;
+  right: 10px;              /* 右端に配置 */
+  top: 50%;
+  transform: translateY(-50%); /* 縦中央に配置 */
+  background: none;         /* 背景なし */
+  border: none;             /* 枠線なし */
+  cursor: pointer;
+  color: #666;
+  font-size: 18px;
 }
 
 .search-box .search-btn:hover {
-    color: #000;
+  color: #000;          /* ホバー時の色 */
 }

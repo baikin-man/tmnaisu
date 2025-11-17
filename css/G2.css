@@ -199,3 +199,43 @@ img { max-width: 100%; height: auto; vertical-align: bottom; }
         height: 200px;
     }
 }
+
+/* --- 左カラム化（縦タグリスト） --- */
+.content2 {
+  display: grid;
+  grid-template-columns: 240px 1fr; /* 左を固定幅、右をコンテンツ */
+  gap: 24px;
+  align-items: start;
+}
+
+/* ▼ 全体を2カラムレイアウト化 */
+.main-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+/* ▼ 左側のタグリスト（サイドメニュー） */
+.tag-list-nav {
+    width: 220px;
+    position: sticky;
+    top: 130px; /* 固定したくない場合は消してOK */
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+/* ▼ 中身の縦並び */
+.tag-list-nav .tags {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.tag-list-nav .tag-btn {
+    padding: 8px 10px;
+    background: #f3f3f3;
+    border-radius: 6px;
+    width: 100%;
+}
