@@ -13,6 +13,7 @@ try {
     $pdo = new PDO($connect, USER, PASS);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+    // ★ 修正: JOIN 時に i.status = 1 (販売中) のみを対象にする
     $sql_popular = "
         SELECT
             h.item_id,
@@ -23,7 +24,7 @@ try {
         FROM
             item_view_history h
         JOIN
-            items i ON h.item_id = i.id
+            items i ON h.item_id = i.id AND i.status = 1 
         GROUP BY
             h.item_id, i.name
         HAVING
@@ -32,10 +33,11 @@ try {
             view_count DESC
         LIMIT 4
     ";
-
+    
     $stmt_popular = $pdo->prepare($sql_popular);
     $stmt_popular->execute();
     $popular_items = $stmt_popular->fetchAll(PDO::FETCH_ASSOC);
+
 } catch (PDOException $e) {
     // (エラーが起きてもサンキューページは表示する)
 }
@@ -57,30 +59,44 @@ try {
     <!-- ★ 固定ヘッダー用の余白 ★ -->
     <style>
         body {
-            padding-top: 115px;
+            /* G9.css 側で padding-top を指定するため、ここは削除してもOK */
+            padding-top: 115px; 
         }
     </style>
 </head>
 
 <body>
-    <?php require 'header2.php'; ?>
+    <?php require 'header2.php';?>
 
-    <div class="complete-box">
-        購入が確定しました
-    </div>
+    <!-- ★ 修正: G8.css と同じ .main で囲う -->
+    <div class="main">
+        <div class="complete-box">
+            <i class="fas fa-check-circle"></i>
+            購入が確定しました
+        </div>
 
-    <a href="G2.php" class="btn-continue">買い物を続ける</a>
+        <a href="G2.php" class="btn-continue">買い物を続ける</a>
 
-    <div class="recommend-title">おすすめの商品はこちら</div>
+        <div class="recommend-title">おすすめの商品はこちら</div>
 
-    <div class="product-list">
-        <?php foreach ($popular_items as $item): ?>
-            <a href="G3.php?id=<?php echo $item['item_id']; ?>" class="product">
-                <img src="<?php echo htmlspecialchars($item['image_url']); ?>" alt="<?php echo htmlspecialchars($item['item_name']); ?>">
-                <div class="price"><?php echo htmlspecialchars($item['item_name']); ?></div>
-            </a>
-        <?php endforeach; ?>
+        <!-- ★ 修正: G2.php と同じ .product-grid 構造に変更 -->
+        <div class="product-grid">
+            <?php foreach ($popular_items as $item): ?>
+                <a href="G3.php?id=<?php echo $item['item_id']; ?>" class="product-card">
+                    <div class="product-img-wrapper">
+                        <?php if (!empty($item['image_url'])): ?>
+                            <img src="<?php echo htmlspecialchars($item['image_url']); ?>" alt="<?php echo htmlspecialchars($item['item_name']); ?>" class="product-img">
+                        <?php else: ?>
+                            <span class="no-image-text">No Image</span>
+                        <?php endif; ?>
+                    </div>
+                    <div class="product-info">
+                        <p class="product-name"><?php echo htmlspecialchars($item['item_name']); ?></p>
+                        <p class="product-price">¥<?php echo number_format($item['price']); ?></p>
+                    </div>
+                </a>
+            <?php endforeach; ?>
+        </div>
     </div>
 </body>
-
 </html>

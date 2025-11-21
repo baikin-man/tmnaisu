@@ -19,9 +19,9 @@ try {
 
   // (A) カート情報を取得
   $sql_cart = "SELECT
-                    carts.id AS cart_id, carts.quantity,
-                    item_skus.price, item_skus.image_url, item_skus.size, item_skus.color,
-                    items.name AS item_name
+                  carts.id AS cart_id, carts.quantity,
+                  item_skus.price, item_skus.image_url, item_skus.size, item_skus.color,
+                  items.name AS item_name
                 FROM carts
                 JOIN item_skus ON carts.item_sku_id = item_skus.id
                 JOIN items ON item_skus.item_id = items.id
@@ -104,18 +104,22 @@ try {
             </div>
           </div>
         <?php endforeach; ?>
-      </div>
 
-      <div class="total">
-        <div>商品合計</div>
-        <strong>¥<?php echo number_format($total_price); ?></strong>
-      </div>
+        <!-- ★ 修正: .total ブロックを .summary-container の末尾に移動 -->
+        <div class="total">
+          <div>商品合計</div>
+          <strong>¥<?php echo number_format($total_price); ?></strong>
+        </div>
+        
+      </div> <!-- ★ .summary-container 終了 -->
+
+      <!-- ★ 修正: .total ブロックをここから削除 -->
 
       <div class="address-container">
         <h3>お届け先</h3>
         <?php if ($address): ?>
           <p class="user-name"><?php echo htmlspecialchars($_SESSION['user_name'] ?? 'お客様'); // ユーザー名がセッションにあれば表示 
-                                ?> 様</p>
+                          ?> 様</p>
           <p>〒<?php echo htmlspecialchars($address['postal_code']); ?></p>
           <p><?php echo htmlspecialchars($address['address']); ?></p>
         <?php endif; ?>
@@ -124,7 +128,8 @@ try {
         <a href="G_address_edit.php" class="address-btn">変更する</a>
       </div>
 
-      <div class="container"> <!-- (注: G8.css で .container スタイルが定義されています) -->
+      <!-- ★ 修正: class="container" -> "payment-container" に変更 -->
+      <div class="payment-container"> 
         <h3>お支払い方法</h3>
 
         <div class="pay-option">

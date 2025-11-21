@@ -1,42 +1,49 @@
 body {
-    font-family: "Hiragino Kaku Gothic ProN", "メイリオ", sans-serif;
-    background-color: #f8f8f8;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    background-color: #f5f5f5; /* G3/G4と同じ背景色 */
     margin: 0;
+    padding-top: 115px; /* header2.css の高さ */
 }
 
+/* --- メインレイアウト --- */
 .main {
-    max-width: 700px;
-    background: white;
+    max-width: 1000px; /* ★ 修正: 700px -> 1000px (サイト統一) */
     margin: 30px auto;
-    border-radius: 12px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    padding: 30px;
+    padding: 0 20px; /* ★ 修正: paddingはコンテナではなく外枠で管理 */
 }
-.total {
-    text-align: center;
-    margin-bottom: 25px;
-}
-.total strong {
-    color: #e74c3c;
-    font-size: 28px;
-}
-.summary-container {
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    padding: 20px;
+
+/* --- カード型コンテナ (G2/G3/G4と共通) --- */
+.summary-container,
+.address-container,
+.payment-container { /* ★ 修正: .container -> .payment-container に変更 (G2.cssとの競合回避) */
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
     margin-bottom: 30px;
-    background: #fafafa;
+    padding: 25px 30px; /* ★ 修正: padding調整 */
+    text-align: left; /* ★ 左揃えを基本にする */
 }
-.summary-container h3 {
-    text-align: center;
+
+/* --- 各セクションのタイトル (h3) --- */
+.summary-container h3,
+.address-container h3,
+.payment-container h3 {
+    text-align: left; /* ★ 修正: センタリング解除 */
     margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
 }
+
+/* --- 1. 注文概要 (summary) --- */
 .summary-item {
     display: flex;
     align-items: center;
     gap: 15px;
     border-bottom: 1px solid #eee;
-    padding: 10px 0;
+    padding: 15px 0; /* ★ 修正: padding調整 */
 }
 .summary-item:last-child {
     border-bottom: none;
@@ -45,31 +52,28 @@ body {
     width: 60px;
     height: 60px;
     object-fit: cover;
-    border-radius: 4px;
+    border-radius: 6px; /* ★ 修正: 4px -> 6px */
+    border: 1px solid #eee;
 }
 .summary-details {
     flex-grow: 1;
 }
 .summary-details .name {
     font-weight: bold;
+    font-size: 1.05rem; /* ★ 追加 */
 }
 .summary-details .sku {
-    font-size: 14px;
+    font-size: 0.9rem; /* ★ 修正: 14px -> 0.9rem */
     color: #666;
 }
 .summary-price {
     font-weight: bold;
+    font-size: 1.05rem; /* ★ 追加 */
 }
+
+/* --- 2. 配送先住所 (address) --- */
 .address-container {
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 30px;
-    background: #fafafa;
-    position: relative;
-}
-.address-container h3 {
-    margin-top: 0;
+    position: relative; /* 変更ボタンの基準 */
 }
 .address-container p {
     margin: 5px 0;
@@ -78,33 +82,29 @@ body {
 }
 .address-container .user-name {
     font-weight: bold;
+    font-size: 1.1rem; /* ★ 追加 */
 }
 .address-btn {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 25px; /* ★ 修正: 20px -> 25px */
+    right: 30px; /* ★ 修正: 20px -> 30px */
     background-color: #f0f0f0;
     color: #333;
-    padding: 8px 15px;
-    border: none;
+    padding: 6px 14px; /* ★ 修正: padding調整 */
+    border: 1px solid #ddd; /* ★ 追加 */
     border-radius: 20px;
     cursor: pointer;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 0.85rem; /* ★ 修正: 14px -> 0.85rem */
     font-weight: bold;
+    transition: 0.2s;
 }
 .address-btn:hover {
-    background-color: #ddd;
+    background-color: #e6e6e6;
+    border-color: #ccc;
 }
 
-/* 支払い方法のラッパー (G8.phpのHTMLで .container クラスが使われているため) */
-.container {
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 30px;
-    background: #fafafa;
-}
+/* --- 3. 支払い方法 (payment) --- */
 .pay-option {
     margin-bottom: 20px;
 }
@@ -112,6 +112,7 @@ body {
     display: block;
     font-weight: bold;
     margin-bottom: 8px;
+    font-size: 1.1rem; /* ★ 追加 */
 }
 .conbini, .card-input-form {
     margin-left: 20px;
@@ -119,14 +120,18 @@ body {
 .conbini p {
     margin-bottom: 8px;
     color: #555;
-    font-size: 14px;
+    font-size: 0.9rem; /* ★ 修正: 14px -> 0.9rem */
 }
 .conbini label {
     display: block;
     margin-left: 20px;
     margin-bottom: 5px;
     color: #333;
+    font-size: 1rem; /* ★ 追加 */
+    font-weight: normal; /* ★ 追加 */
 }
+
+/* クレジットカードフォーム */
 .card-form {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -137,17 +142,18 @@ body {
     grid-column: 1 / -1;
 }
 .card-form label {
-    font-size: 14px;
-    color: #333;
+    font-size: 0.85rem; /* ★ 修正: 14px -> 0.85rem */
+    color: #555; /* ★ 修正: #333 -> #555 */
     margin-bottom: 6px;
     display: block;
+    font-weight: bold; /* ★ 追加 */
 }
 .card-form input, .card-form select {
     width: 100%;
-    padding: 10px;
+    padding: 10px 12px; /* ★ 修正: padding調整 */
     border: 1px solid #ccc;
     border-radius: 6px;
-    font-size: 16px;
+    font-size: 1rem; /* ★ 修正: 16px -> 1rem */
     box-sizing: border-box;
 }
 .small-row {
@@ -157,21 +163,69 @@ body {
 .small-row .half {
     flex: 1 1 0;
 }
+
+/* --- 4. 合計とボタン --- */
+.total {
+    text-align: right; /* ★ 修正: センタリング -> 右寄せ */
+    margin-top: 20px; /* ★ 修正: summary-itemとの間隔 */
+    padding-top: 20px; /* ★ 修正: 線との間隔 */
+    border-top: 1px solid #ddd; /* ★ 修正: 区切り線 */
+    margin-bottom: 0; /* ★ 修正: 25px -> 0 */
+}
+.total strong {
+    color: #d00; /* ★ 修正: #e74c3c -> #d00 (G3/G4と統一) */
+    font-size: 2rem; /* ★ 修正: 28px -> 2rem */
+}
+
 .buttons {
     text-align: center;
 }
+/* ★ 修正: 注文確定ボタン (G3/G4と統一) */
 .order-btn {
-    padding: 12px 25px;
+    width: 320px; /* ★ 幅を指定 */
+    max-width: 100%;
+    padding: 14px 25px;
     border: none;
-    border-radius: 25px;
-    font-size: 16px;
+    border-radius: 6px; /* ★ 修正: 25px -> 6px */
+    font-size: 1.1rem; /* ★ 修正: 16px -> 1.1rem */
     cursor: pointer;
     margin: 8px;
     font-weight: bold;
     transition: all 0.2s ease;
-    background-color: #ffcc33;
-    color: #000;
+    background-color: #222; /* ★ 修正: 黄色 -> 黒 */
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 .order-btn:hover {
-    background-color: #ffb700;
+    background-color: #444; /* ★ 修正 */
+    transform: translateY(-2px); /* ★ 追加 */
+}
+
+/* --- レスポンシブ (スマホ) --- */
+@media (max-width: 768px) {
+    .main {
+        margin: 15px auto;
+        padding: 0 10px;
+    }
+    .summary-container,
+    .address-container,
+    .payment-container {
+        padding: 20px 15px;
+    }
+    .address-btn {
+        position: static; /* ★ 修正: SPではボタンをスタック */
+        margin-top: 15px;
+        text-align: center;
+        display: block;
+    }
+    .card-form {
+        grid-template-columns: 1fr; /* ★ 1カラム */
+    }
+    .small-row {
+        flex-direction: column; /* ★ 縦並び */
+    }
+    .total {
+        text-align: center;
+        padding-right: 0;
+    }
 }

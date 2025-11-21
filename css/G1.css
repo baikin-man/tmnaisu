@@ -31,7 +31,9 @@ body {
     background-repeat: no-repeat;
     position: relative;
 
-    padding-top: 115px;
+    /* ★ 修正: G1.css では body の padding-top をリセット(0)する */
+    /* G2.php や G3.php は各CSSで 115px を指定する */
+    padding-top: 0; 
 }
 
 /* 背景上に薄い暗いオーバーレイを重ねる */
@@ -44,10 +46,8 @@ body::before {
     z-index: 0;
 }
 
-.site-header a {
-    color: inherit;
-    text-decoration: none;
-}
+/* ★ 削除: .site-header 関連のスタイルを削除 (header2.css に一任) */
+/* .site-header a { ... } */
 
 /* メイン：ログインカードを縦中央に配置 */
 .wrap {
@@ -55,7 +55,7 @@ body::before {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 120px; /* ヘッダー分の余白を確保 */
+    /* ★ 修正: padding-top: 120px; を削除 (flex で中央揃えするため不要) */
     position: relative;
     z-index: 10;
 }
@@ -177,13 +177,8 @@ body::before {
 
 /* レスポンシブ */
 @media (max-width:480px) {
-    .site-header {
-        height: 96px;
-        padding-bottom: 6px;
-    }
-    .site-header .brand {
-        font-size: 56px;
-    }
+    /* ★ 削除: .site-header 関連 */
+
     .login-card {
         width: 92%;
         padding: 26px 18px;

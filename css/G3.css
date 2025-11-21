@@ -1,198 +1,240 @@
+/* リセット・基本設定 */
 body {
-    font-family: sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
     background: #f5f5f5;
     margin: 0;
-    padding-top: 115px;
-
+    padding-top: 115px; /* header2.css の高さ */
 }
 
+/* --- レイアウトコンテナ --- */
 .product-container {
-    display: flex;
+    display: grid;
+    /* PCでは 1.2 : 1 の2カラムレイアウト */
+    grid-template-columns: 1.2fr 1fr;
     gap: 40px;
-    max-width: 800px;
-    margin: auto;
+    max-width: 1100px; /* PCでの最大幅を 800px -> 1100px に拡大 */
+    margin: 30px auto;
+    padding: 0 20px;
 }
 
 /* ----- 左側：画像エリア ----- */
 .image-section {
     position: relative;
+    width: 100%;
 }
 
 .main-image {
-    width: 420px;
-    height: 320px;
+    width: 100%;
+    aspect-ratio: 4 / 3.5; /* ★ 修正: 高さを可変に (横4:縦3.5の比率) */
     background: #eee;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 6px;
-
-    background-size: contain; /* 画像を枠内に収める */
-    background-position: center; /* 画像を中央に配置 */
-    background-repeat: no-repeat; /* 画像を繰り返さない */
+    border-radius: 8px; /* 角を丸める */
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 1px solid #ddd;
 }
 
 .nav-btn {
     position: absolute;
-    top: 45%;
-    background: #ddd;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
+    top: 50%;
+    /* ★ 修正: メイン画像の(内側/外側)に配置調整 */
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     cursor: pointer;
-    font-size: 22px;
+    font-size: 20px;
     transition: 0.2s;
+    z-index: 10;
 }
-
-.nav-btn:hover {
-    background: #ccc;
-}
-
-.nav-btn.left { left: -30px; }
-.nav-btn.right { right: -30px; }
+.nav-btn:hover { background: #fff; }
+.nav-btn.left { left: 15px; } /* ★ 修正: 枠の内側に */
+.nav-btn.right { right: 15px; } /* ★ 修正: 枠の内側に */
 
 .thumbnail-list {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    /* ★ 修正: 横幅いっぱいに自動で並べる */
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
     gap: 12px;
-    margin-top: 20px;
+    margin-top: 15px;
 }
-
 .thumb {
-    width: 110px;
-    height: 80px;
+    width: 100%; /* ★ 修正: 110px固定 -> 100% */
+    aspect-ratio: 4 / 3; /* ★ 修正: 高さを比率で指定 */
     background: #eee;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 6px; /* ★ 修正: 角を丸める */
     cursor: pointer;
     transition: 0.2s;
-
-    background-size: contain; /* 画像を枠内に収める */
-    background-position: center; /* 画像を中央に配置 */
-    background-repeat: no-repeat; /* 画像を繰り返さない */
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
 }
-
-.thumb:hover {
-    filter: brightness(0.9);
-}
-
+.thumb:hover { opacity: 0.7; }
 .thumb.selected {
-    outline: 3px solid #4aa3ff;
+    border: 2px solid #007bff; /* ★ 修正: 枠線を細く */
+    outline: none;
+    box-shadow: 0 0 8px rgba(0,123,255,0.5);
 }
 
 /* ----- 右側：商品情報エリア ----- */
 .info-section {
-    width: 300px;
-}
-
-.price {
-    font-size: 36px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-/* サイズボタン */
-.size-list button.size {
-    width: 100%;
+    width: 100%; /* ★ 修正: 300px固定 -> 100% */
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+}
+.info-section h1 {
+    font-size: 1.8rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+    line-height: 1.4;
+    color: #222; /* ★ 修正: 商品名を濃い色（黒）に指定 */
+}
+.price {
+    font-size: 2rem; /* ★ 修正: 36px -> 2rem */
+    font-weight: bold;
+    color: #d00; /* ★ 目立つ色に */
+    margin-bottom: 25px;
+}
+
+/* ★ 修正: サイズボタン (チップスタイル) */
+.size-list {
+    display: flex;
+    flex-wrap: wrap; /* 折り返す */
+    gap: 10px;
+    margin-bottom: 25px;
+}
+.size-list button.size {
+    /* ★ 削除: width: 100% */
+    display: flex;
+    justify-content: center; /* ★ 修正: 中央揃え */
     align-items: center;
-    padding: 12px;
-    margin-bottom: 12px;
+    padding: 8px 16px; /* ★ 修正: パディング変更 */
+    margin-bottom: 0; /* ★ 修正 */
     border: 1px solid #bfbfbf;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 1rem; /* ★ 修正: 20px -> 1rem */
     background: #fff;
     transition: 0.2s;
 }
-
 .size-list button.size:hover {
-    background: #e7e7e7;
+    background: #f0f0f0;
+    border-color: #888;
 }
-
 button.size.selected {
-    background: #4aa3ff;
+    background: #333; /* ★ 修正: 選択色を黒に */
     color: #fff;
-    border-color: #1f7bd8;
+    border-color: #333;
     font-weight: bold;
 }
 
 /* カラー選択ボタン */
 .color-list {
     display: flex;
-    gap: 10px;
-    margin: 20px 0;
+    gap: 12px; /* ★ 修正: 10px -> 12px */
+    margin: 0 0 25px; /* ★ 修正: マージン調整 */
 }
-
 .color-list button.color {
-    width: 32px;
-    height: 32px;
+    width: 36px; /* ★ 修正: 32px -> 36px */
+    height: 36px;
     border-radius: 50%;
     border: 2px solid #ccc;
     cursor: pointer;
     transition: 0.2s;
+    padding: 0; /* ★ 追加 */
 }
-
 .color-list button.color:hover {
     transform: scale(1.1);
+    border-color: #888;
 }
-
 button.color.selected {
-    border: 3px solid #4aa3ff;
+    border: 3px solid #007bff; /* ★ 修正: 選択色を青に */
+    box-shadow: 0 0 8px rgba(0,123,255,0.5);
 }
-
-/*
-  JavaScript側で .style.backgroundColor = sku.color;
-  と直接指定しているため、
-  以下の .black .white などの定義は無くても機能します。
-  （もしJavaScriptが無効な場合のフォールバックとして残すのはOKです）
-*/
-.black { background: #000; }
-.white { background: #fff; }
-.red { background: red; }
-.yellow { background: #f7d78a; }
-.blue { background: blue; }
-.purple { background: #3b0099; }
 
 /* 数量セレクタ */
 .quantity-selector {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 .quantity-selector label {
     font-weight: bold;
     margin-right: 10px;
+    font-size: 0.9rem;
 }
 .quantity-selector input {
-    width: 60px;
+    width: 70px;
     padding: 8px;
-    font-size: 16px;
+    font-size: 1rem;
     text-align: center;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
 /* カートボタン */
+.cart-form {
+    margin-top: auto; /* ★ 追加: 常に一番下に配置 */
+}
 .cart-btn {
     width: 100%;
     padding: 14px;
-    font-size: 22px;
-    background: #dff1ff;
-    border: 2px solid #9ec9e8;
+    font-size: 1.1rem; /* ★ 修正: 22px -> 1.1rem */
+    background: #222; /* ★ 修正: 目立つ色 (黒) に */
+    color: #fff;
+    border: 2px solid #222;
     border-radius: 6px;
     cursor: pointer;
     font-weight: bold;
     transition: 0.25s;
 }
-
 .cart-btn:hover {
-    background: #c5e7ff;
+    background: #444;
+    border-color: #444;
 }
-
-/* カートボタンが無効（disabled）の時 */
 .cart-btn:disabled {
     background: #e9e9e9;
     border-color: #ccc;
     color: #999;
     cursor: not-allowed;
+}
+
+/* --- レスポンシブ対応 (スマホ) --- */
+@media (max-width: 768px) {
+    .product-container {
+        display: block; /* ★ 1カラムに戻す */
+        margin-top: 15px;
+    }
+    
+    .image-section {
+        position: relative;
+    }
+    
+    .main-image {
+        aspect-ratio: 1 / 1; /* ★ スマホでは正方形に */
+    }
+    
+    .nav-btn.left { left: 10px; }
+    .nav-btn.right { right: 10px; }
+
+    .thumbnail-list {
+        /* 5列固定にする */
+        grid-template-columns: repeat(5, 1fr);
+        gap: 8px;
+    }
+    
+    .info-section {
+        margin-top: 25px; /* 画像との間隔 */
+    }
+    .info-section h1 {
+        font-size: 1.5rem;
+    }
+    .price {
+        font-size: 1.8rem;
+    }
 }

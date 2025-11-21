@@ -1,96 +1,49 @@
+/* リセット・基本設定 (G2/G3 と共通化) */
 body {
-  font-family: "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
-  background-color: #fff;
-  padding-top: 115px;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    background-color: #f5f5f5; /* G3と同じ背景色 */
+    margin: 0;
+    padding-top: 115px; /* header2.css の高さ */
 }
 
+/* コンテナ (G2/G3 と共通化) */
 .container {
-  text-align: center;
-  margin-top: 50px;
+    max-width: 1000px; /* カートなので G2/G3 (1100px) より少し狭く */
+    margin: 30px auto;
+    padding: 0 20px;
+    text-align: center; /* 元の G4.css の指定を維持 */
 }
 
+/* タイトル (h2) */
 h2 {
-  font-size: 1.8em;
-  font-weight: bold;
-  margin-bottom: 10px;
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 25px; /* マージン調整 */
+    text-align: left; /* ★ 修正: 左揃えに変更 */
 }
 
-.price-before {
-  font-size: 1.5em;
-  color: #000;
-  text-decoration: line-through;
-  margin: 5px 0;
-  position: relative;
+/* --- ★ カート商品リスト ★ --- */
+.cart-list {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
+    margin-bottom: 30px;
+    padding: 10px 25px;
+    text-align: left; /* ★ リスト内は左揃えに */
 }
-
-.off {
-  color: #ff4d4d;
-  font-size: 0.7em;
-  position: absolute;
-  right: -70px;
-  top: 0;
-}
-
-.price-after {
-  color: #ff1f1f;
-  font-size: 1.8em;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.button-area {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-}
-
-/* ✅ 水色の「レジへ移動」ボタン */
-.move-btn {
-  background-color: #d9ebf7;
-  border: 2px solid #444;
-  padding: 10px 25px;
-  border-radius: 12px;
-  font-size: 1.3em;
-  font-weight: bold;
-  color: #000;
-  box-shadow: 2px 2px 4px #888;
-  transition: 0.2s;
-  cursor: pointer;
-}
-
-.move-btn:hover {
-  background-color: #b8dff2;
-  transform: translateY(-2px);
-}
-
-/* ✅ 白い「買い物を続ける」ボタン */
-.continue-btn {
-  display: inline-block;
-  background-color: #fff;
-  color: #000;
-  border: 2px solid #ccc;
-  padding: 10px 25px;
-  border-radius: 12px;
-  font-weight: bold;
-  text-decoration: none;
-  box-shadow: 2px 2px 4px #ccc;
-  transition: 0.2s;
-}
-
-.continue-btn:hover {
-  background-color: #f2f2f2;
-  transform: translateY(-2px);
-}
-
-/* G4.css に追加 */
 
 /* カートの各商品のコンテナ */
 .cart-item {
     display: flex; /* 画像、詳細、削除ボタンを横並びにする */
     align-items: center; /* 上下中央揃え */
     border-bottom: 1px solid #eee;
-    padding: 15px 0;
+    padding: 20px 0; /* ★ 修正: 15px -> 20px */
     gap: 20px; /* 要素間の隙間 */
+}
+/* 最後のアイテムのボーダーは消す */
+.cart-list .cart-item:last-child {
+    border-bottom: none;
 }
 
 /* 画像を囲むコンテナ */
@@ -98,29 +51,195 @@ h2 {
     width: 100px;  /* 画像コンテナの幅を固定 */
     height: 100px; /* 画像コンテナの高さを固定 */
     flex-shrink: 0; /* コンテナが縮まないようにする */
+    border: 1px solid #eee;
+    border-radius: 6px;
 }
-
-/* ▼▼▼ この設定が一番重要です ▼▼▼ */
-/* 画像自体への設定 */
 .cart-item-image img {
-    width: 100%;  /* 親コンテナ(100px)いっぱいに広げる */
-    height: 100%; /* 親コンテナ(100px)いっぱいに広げる */
-    
-    /* * 縦横比を保ったまま、枠内に収まるように切り抜く
-     * (contain にすると隙間ができます)
-     */
+    width: 100%;
+    height: 100%;
     object-fit: cover; 
+    border-radius: 6px; /* ★ 追加 */
 }
 
 /* 商品詳細（商品名など） */
 .cart-item-details {
     flex-grow: 1; /* 残りのスペースをすべて使う */
 }
+.cart-item-details .name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.cart-item-details .sku {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 5px;
+}
+.cart-item-details .price-unit {
+    font-size: 1rem;
+    color: #333;
+}
 
-/* 数量や削除ボタン */
-.cart-item-quantity,
-.cart-item-total,
-.cart-item-delete {
-    flex-shrink: 0; /* 縮まないようにする */
+
+/* 数量 */
+.cart-item-quantity {
+    flex-shrink: 0; 
     margin: 0 10px;
+    width: 100px; /* ★ 幅を固定 */
+    text-align: center;
+}
+.cart-item-quantity input {
+    width: 60px;
+    padding: 8px;
+    font-size: 1rem;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* 合計金額 */
+.cart-item-total {
+    flex-shrink: 0; 
+    margin: 0 10px;
+    width: 100px; /* ★ 幅を固定 */
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* 削除ボタン */
+.cart-item-delete {
+    flex-shrink: 0; 
+    margin: 0 10px;
+}
+.cart-item-delete a {
+    color: #dc3545;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+.cart-item-delete a:hover {
+    color: #c82333;
+}
+
+
+/* --- ★ 合計金額エリア ★ --- */
+.total-summary {
+    max-width: 400px;
+    margin: 0 auto 30px; /* ★ センタリング */
+    text-align: right;
+}
+
+.price-before {
+    font-size: 1.2em; /* ★ 修正: 1.5em -> 1.2em */
+    color: #555; /* ★ 修正: #000 -> #555 */
+    text-decoration: line-through;
+    margin: 5px 0;
+    position: relative; /* 'off'バッジの基準 */
+}
+.off {
+    color: #ff4d4d;
+    font-size: 0.8em; /* ★ 修正: 0.7em -> 0.8em */
+    position: absolute;
+    right: 0; /* ★ 修正: -70px -> 0 */
+    top: -20px; /* ★ 修正: 0 -> -20px */
+    font-weight: bold;
+    background: #fff0f0;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+.price-after {
+    color: #d00; /* ★ 修正: #ff1f1f -> #d00 (G3と統一) */
+    font-size: 2em; /* ★ 修正: 1.8em -> 2em */
+    font-weight: bold;
+    margin-bottom: 20px;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+/* --- ★ ボタンエリア ★ --- */
+.button-area {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    border-top: 1px solid #ddd;
+    padding-top: 30px;
+}
+
+/* ★ 修正: 「レジへ移動」ボタン (G3のカートボタン風) */
+.move-btn {
+    width: 280px;
+    padding: 14px;
+    font-size: 1.1rem;
+    background: #222;
+    color: #fff;
+    border: 2px solid #222;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.25s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.move-btn:hover {
+    background: #444;
+    border-color: #444;
+    transform: translateY(-2px);
+}
+
+/* ★ 修正: 「買い物を続ける」ボタン (G2のタグボタン風) */
+.continue-btn {
+    display: inline-block;
+    padding: 14px 25px;
+    font-size: 1.1rem;
+    color: #007bff;
+    background-color: #f0f8ff;
+    border: 1px solid #bde0ff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.2s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+.continue-btn:hover {
+    background-color: #e2f1ff;
+    transform: translateY(-2px);
+}
+
+/* --- レスポンシブ (スマホ) --- */
+@media (max-width: 768px) {
+    .container {
+        margin-top: 15px;
+    }
+    .cart-list {
+        padding: 0 15px;
+    }
+    .cart-item {
+        flex-wrap: wrap; /* ★ スマホでは折り返す */
+        gap: 10px;
+    }
+    .cart-item-image {
+        width: 80px;
+        height: 80px;
+    }
+    .cart-item-details {
+        width: calc(100% - 90px); /* 画像の横に配置 */
+        flex-grow: 0;
+    }
+    .cart-item-quantity {
+        width: auto; /* 幅を自動に */
+        margin-left: 10px;
+    }
+    .cart-item-total {
+        width: auto;
+        margin-left: auto; /* ★ 右端に配置 */
+    }
+    .cart-item-delete {
+        margin-left: auto; /* ★ 右端に配置 */
+    }
+    .button-area {
+        flex-direction: column-reverse; /* ★ ボタンを縦積みに（レジへ進むが下） */
+    }
+    .move-btn {
+        width: 100%; /* 全幅 */
+    }
 }
