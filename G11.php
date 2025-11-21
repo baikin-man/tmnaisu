@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>利用規約</title>
-    <link rel="stylesheet" href="./css/G11.css"> </head>
-    <link rel="stylesheet" href="header2.css"> </head>
+    <link rel="stylesheet" href="./css/header.css"> 
+    <link rel="stylesheet" href="./css/G11.css"> 
+</head>
 <body>
-     <div class="back-button">
-         <a href="https://aso-2401341.vivian.jp/2025/test/G10.php">戻る</a>
-    </div>
+    <?php require 'header.php'; ?>
 
     <div class="terms-container">
         
+        <div class="back-button">
+             <a href="G10.php">登録画面に戻る</a>
+        </div>
+
         <h1>利用規約</h1>
         
         <h2>第1条 本規約の適用範囲</h2>

@@ -1,13 +1,11 @@
 <?php session_start(); ?>
 <?php
-// ▼▼▼ PHP処理ブロック (変更なし・完璧) ▼▼▼
-// 既にログイン済みの場合は、G2（トップページ）にリダイレクト
+// ▼▼▼ PHP処理ブロック (変更なし) ▼▼▼
 if (isset($_SESSION['user_id'])) {
-  header('Location: G2.php'); // ※G2.phpはトップページのパスを想定
+  header('Location: G2.php');
   exit;
 }
 
-// エラーメッセージの取得
 $error_message = '';
 if (isset($_GET['error'])) {
   if ($_GET['error'] == '1') {
@@ -19,7 +17,6 @@ if (isset($_GET['error'])) {
   }
 }
 
-// アカウント作成成功メッセージ
 $success_message = '';
 if (isset($_GET['signup']) && $_GET['signup'] == 'success') {
   $success_message = 'アカウント作成が完了しました。ログインしてください。';
@@ -36,13 +33,11 @@ if (isset($_GET['signup']) && $_GET['signup'] == 'success') {
 
   <link rel="stylesheet" href="./css/G1.css">
   <link rel="stylesheet" href="./css/header.css">
-
 </head>
 
 <body>
-  <header class="site-header">
-    <?php require './header.php'; ?>
-  </header>
+  <?php require 'header.php'; ?>
+
   <div class="wrap">
     <div class="login-card" role="region" aria-label="ログイン">
       <h2>Login</h2>
@@ -72,5 +67,4 @@ if (isset($_GET['signup']) && $_GET['signup'] == 'success') {
   </div>
 
 </body>
-
 </html>
