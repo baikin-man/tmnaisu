@@ -68,20 +68,15 @@ try {
   <title>ZeZe - 注文確認</title>
 
   <!-- ★ 外部CSSの読み込み ★ -->
-  <link rel="stylesheet" href="header2.css"> <!-- ヘッダーCSS -->
+  <link rel="stylesheet" href="./css/header.css"> <!-- ヘッダーCSS -->
   <link rel="stylesheet" href="./css/G8.css"> <!-- このページ専用CSS -->
 
-  <!-- ★ 固定ヘッダー用の余白 ★ -->
-  <style>
-    body {
-      padding-top: 115px;
-    }
-  </style>
+
 </head>
 
 <body>
 
-  <?php require 'header2.php'; ?>
+  <?php require 'header.php'; ?>
 
   <div class="main">
 

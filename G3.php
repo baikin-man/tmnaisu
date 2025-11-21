@@ -5,7 +5,7 @@ error_reporting(E_ALL); ?>
 <?php require 'db-connect.php';
 
 // 1. GETパラメータから商品IDを取得
-$item_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$item_id = isset($_GET['id']) ? (int)$_GET['id'] : 0; 
 if ($item_id <= 0) {
     echo "商品が指定されていません。";
     exit;
@@ -72,7 +72,7 @@ try {
     <title><?php echo htmlspecialchars($item['name']); ?> - 商品詳細</title>
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-    <link rel="stylesheet" href="header2.css"> 
+    <link rel="stylesheet" href="./css/header.css"> 
     <link rel="stylesheet" href="./css/G3.css"> 
 
 </head>
@@ -300,7 +300,7 @@ try {
 </script>
 
 <body>
-    <?php require 'header2.php'; ?>
+    <?php require 'header.php'; ?>
 
     <div class="product-container">
         <!-- 左側：画像セクション -->

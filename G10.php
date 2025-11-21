@@ -29,27 +29,13 @@ if (isset($_GET['error'])) {
     <title>ZeZe - 新規登録</title>
     
     <!-- ★ 外部CSSの読み込み ★ -->
-    <link rel="stylesheet" href="header2.css"> <!-- ヘッダーCSS -->
+    <link rel="stylesheet" href="./css/header.css"> <!-- ヘッダーCSS -->
     <link rel="stylesheet" href="./css/G10.css">   <!-- このページ専用CSS -->
 
     <!-- ★ 固定ヘッダー用の余白 ★ -->
-    <style>
-        body {
-            /* header2.css の .kotei の高さと合わせる */
-            padding-top: 115px; 
-            
-            /* 元の<style>タグにあった body スタイル */
-            /* 背景画像を使いたい場合は、以下のコメントを解除してください */
-            /*
-            margin: 0;
-            font-family: "Hiragino Kaku Gothic ProN", "メイリオ", sans-serif;
-            background: url('bg.jpg') center/cover no-repeat;
-            */
-        }
-    </style>
 </head>
 <body>
-    <?php require 'header2.php';?>
+    <?php require 'header.php';?>
 <div class="wrap">
     <h2>新規登録</h2>
     

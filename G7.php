@@ -101,7 +101,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-    <link rel="stylesheet" href="header2.css">
+    <link rel="stylesheet" href="./css/header.css">
     
     <!-- ★ 修正: G7.css を読み込む (パスは環境に合わせてください) -->
     <link rel="stylesheet" href="./css/G7.css"> 
@@ -112,7 +112,7 @@ try {
 
 </head>
 <body>
-    <?php require 'header2.php'; ?>
+    <?php require 'header.php'; ?>
 
     <div class="container">
         <div class="search-result-header">

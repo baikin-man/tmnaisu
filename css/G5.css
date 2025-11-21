@@ -1,0 +1,282 @@
+@charset "UTF-8";
+
+body {
+    background-color: #f5f7fa;
+    color: #333;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+/* レイアウトコンテナ */
+.mypage-container {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 250px 1fr; /* 左サイドバー250px、右コンテンツ残り */
+    gap: 30px;
+}
+
+/* --- サイドバー --- */
+.sidebar {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    padding: 20px;
+    height: fit-content;
+    position: sticky;
+    top: 130px; /* ヘッダー分空ける */
+}
+
+.profile-summary {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.avatar-circle {
+    width: 70px;
+    height: 70px;
+    background: #e9ecef;
+    color: #adb5bd;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    margin: 0 auto 10px;
+}
+
+.user-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.account-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.menu-item {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #555;
+    border-radius: 5px;
+    transition: background 0.2s;
+    font-size: 0.95rem;
+}
+
+.menu-item i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+.menu-item:hover {
+    background-color: #f0f8ff;
+    color: #007bff;
+}
+
+.menu-item.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.menu-item.logout {
+    color: #dc3545;
+    border-top: 1px solid #eee;
+    margin-top: 10px;
+    padding-top: 15px;
+}
+.menu-item.logout:hover {
+    background-color: #ffeaea;
+}
+
+/* --- メインコンテンツエリア --- */
+.section-block {
+    margin-bottom: 50px;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    border-left: 5px solid #007bff;
+    padding-left: 15px;
+    margin-bottom: 20px;
+    color: #222;
+}
+
+.no-data {
+    color: #999;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+}
+
+/* 注文カード */
+.order-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.order-header {
+    background: #f8f9fa;
+    padding: 12px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #555;
+}
+.order-header .val {
+    font-weight: bold;
+    color: #333;
+    margin-left: 5px;
+}
+.order-header .total-price {
+    font-weight: bold;
+    color: #d00;
+    font-size: 1.1rem;
+    margin-left: 5px;
+}
+
+.order-body {
+    padding: 15px 20px;
+}
+
+.order-item-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+.order-item-row:last-child {
+    border-bottom: none;
+}
+
+.img-link img, .no-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #eee;
+}
+.no-img {
+    background: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    color: #aaa;
+}
+
+.item-details {
+    flex-grow: 1;
+}
+.item-link {
+    font-weight: bold;
+    color: #007bff;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 3px;
+}
+.item-link:hover { text-decoration: underline; }
+
+.item-meta {
+    font-size: 0.85rem;
+    color: #777;
+}
+.item-price-qty {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-top: 3px;
+}
+
+.buy-again-btn {
+    display: inline-block;
+    padding: 6px 12px;
+    border: 1px solid #007bff;
+    color: #007bff;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: 0.2s;
+}
+.buy-again-btn:hover {
+    background: #007bff;
+    color: #fff;
+}
+
+/* 閲覧履歴グリッド */
+.history-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.history-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    text-decoration: none;
+    color: inherit;
+    transition: 0.2s;
+    display: block;
+    overflow: hidden;
+}
+.history-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+.history-img-wrapper {
+    width: 100%;
+    height: 150px;
+    background: #f9f9f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.history-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.history-info {
+    padding: 10px;
+}
+.h-name {
+    font-size: 0.9rem;
+    margin: 0 0 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.h-price {
+    font-weight: bold;
+    color: #d00;
+    font-size: 1rem;
+    margin: 0;
+}
+
+/* スマホ対応 */
+@media (max-width: 768px) {
+    .mypage-container {
+        grid-template-columns: 1fr; /* 1カラムに */
+        gap: 20px;
+    }
+    .sidebar {
+        position: static;
+    }
+    .order-header {
+        flex-direction: column;
+        gap: 5px;
+    }
+}

@@ -1,141 +1,188 @@
-/* スペースを追加して修正 */
-#header-style .header {
-  display: flex; /* セミコロンを1つに修正 */
-  background-color: darkgrey;
+@charset "UTF-8";
+
+/* ヘッダー全体の固定ラッパー */
+.kotei {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
-/* h1 も #header-style の中だけに限定 */
-#header-style h1 {
-  color: white;
-  font-size: 75px;
+/* ヘッダー本体 */
+header {
+    display: flex;
+    background-color: #696969;
+    justify-content: space-between; /* 左中右に配置 */
+    align-items: center;
+    height: 80px; /* ★高さ変更: 115px -> 80px */
+    padding: 0 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-/* IDセレクタは単独でもOK */
-#center{
-  margin: 0 auto;
+/* ロゴ */
+h1#logo {
+    margin: 0;
+    padding: 0;
+    margin-left: 60px; /* ハンバーガーメニューとの距離 */
+    flex-shrink: 0; /* ロゴは縮めない */
+}
+h1#logo a {
+    color: white;
+    font-size: 48px; /* ★サイズ変更: 75px -> 48px */
+    text-decoration: none;
+    font-weight: bold;
+    line-height: 1;
+}
+h1#logo a:hover {
+    opacity: 0.8;
 }
 
-
-/* ハンバーガーメニューのスタイル */
-/* スペースを追加して修正 */
-#header-style .menu-wrapper {
-  position: relative;
+/* 検索ボックス (中央配置・伸縮あり) */
+.search-box {
+    flex-grow: 1;        /* 余白を埋めるように伸びる */
+    max-width: 500px;    /* 最大幅を制限 */
+    margin: 0 20px;      /* ロゴとカートとの間隔 */
+    display: flex;
+    position: relative;  /* ボタン配置の基準 */
+}
+.search-box input[type="text"] {
+    width: 100%;
+    height: 36px; /* ★高さ調整 */
+    border: none;
+    border-radius: 18px;
+    padding: 0 40px 0 15px;
+    font-size: 14px;
+    outline: none;
+}
+.search-box .search-btn {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #666;
+    font-size: 16px;
 }
 
-/* スペースを追加して修正 */
-#header-style .menu-icon {
-  width: 50px;
-  height: 50px;
-  position: fixed; /* ← fixedにして常に左上固定 */
-  top: 45px;
-  left: 20px;
-  cursor: pointer;
-  z-index: 3;
-  display: inline-block;
+/* カートアイコン (右端・縮小なし) */
+.cart-link {
+    flex-shrink: 0;
+    color: whitesmoke;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
 }
-
-/* スペースを追加して修正 */
-#header-style .menu-icon span {
-  display: block;
-  height: 4px;
-  margin: 6px 0;
-  background: gainsboro;
-  border-radius: 2px;
-  transition: 0.4s;
-}
-
-/* ハンバーガーがXに変形
-  (ここはID #menu-toggle を基点にしているので、修正不要でそのまま動作します) 
-*/
-#menu-toggle:checked + .menu-icon span:nth-child(1) {
-  transform: translateY(10px) rotate(45deg);
-}
-#menu-toggle:checked + .menu-icon span:nth-child(2) {
-  opacity: 0;
-}
-#menu-toggle:checked + .menu-icon span:nth-child(3) {
-  transform: translateY(-10px) rotate(-45deg);
-}
-
-/* オーバーレイ背景 
-  (ベースのスタイルにスペースを追加修正)
-*/
-#header-style .overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-  opacity: 0;
-  pointer-events: none;
-  transition: 0.4s;
-  z-index: 1;
-}
-
-/* (ここはID #menu-toggle を基点にしているので、修正不要) 
-*/
-#menu-toggle:checked ~ .overlay {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* メニュー本体（左から出す） 
-  (ベースのスタイルにスペースを追加修正)
-*/
-#header-style .menu {
-  position: fixed;
-  top: 0;
-  left: -250px; /* ← 初期位置を左へ */
-  width: 250px;
-  height: 100%;
-  background: white;
-  box-shadow: 2px 0 8px rgba(0,0,0,0.2);
-  transition: left 0.4s ease;
-  z-index: 2;
-}
-
-/* (ここはID #menu-toggle を基点にしているので、修正不要) 
-*/
-#menu-toggle:checked ~ .menu {
-  left: 0; /* ← 開いたときは左0へ */
-}
-
-/* スペースを追加して修正 */
-#header-style .menu ul {
-  list-style: none;
-  padding: 60px 20px;
-}
-
-/* スペースを追加して修正 */
-#header-style .menu li {
-  margin: 20px 0;
-}
-
-/* スペースを追加して修正 */
-#header-style .menu a {
-  text-decoration: none;
-  color: #333;
-  font-size: 1.2rem;
-  transition: color 0.3s;
-}
-
-/* スペースを追加して修正 */
-#header-style .menu a:hover {
-  color: #007bff;
-}
-
-/*　カートアイコン　*/
-/* IDセレクタなので、そのままでOK */
 #cart-icon {
-  font-size: 50px;    /* アイコンサイズ */
-  color: whitesmoke;        /* 色 */
-  position: absolute;   /* 位置指定（ヘッダー右上などに） */
-  top: 40px;
-  right: 40px;
-  cursor: pointer;      /* ホバーでクリック感を出す */
-  transition: 0.3s;     /* アニメーション */
+    font-size: 32px; /* ★サイズ変更: 50px -> 32px */
+    transition: 0.3s;
+}
+.cart-link:hover #cart-icon {
+    color: #ccc;
+    transform: scale(1.1);
 }
 
-/* IDセレクタなので、そのままでOK */
-#cart-icon:hover {
-  color: gray;
-  transform: scale(1.1);  /* ちょっと拡大 */
+/* ハンバーガーメニューアイコン */
+.menu-wrapper {
+    position: fixed;
+    top: 20px; /* ★位置調整 */
+    left: 20px;
+    z-index: 1003;
+}
+.menu-icon {
+    width: 40px; /* ★サイズ調整 */
+    height: 32px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.menu-icon span {
+    display: block;
+    height: 3px; /* 線を少し細く */
+    background: gainsboro;
+    border-radius: 2px;
+    transition: 0.4s;
+}
+
+/* ハンバーガーアニメーション */
+#menu-toggle:checked + .menu-wrapper .menu-icon span:nth-child(1) {
+    transform: translateY(14px) rotate(45deg);
+}
+#menu-toggle:checked + .menu-wrapper .menu-icon span:nth-child(2) {
+    opacity: 0;
+}
+#menu-toggle:checked + .menu-wrapper .menu-icon span:nth-child(3) {
+    transform: translateY(-14px) rotate(-45deg);
+}
+
+/* オーバーレイ背景 */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.4s;
+    z-index: 1001;
+}
+#menu-toggle:checked ~ .overlay {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* メニュー本体 */
+.menu {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    height: 100%;
+    background: white;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+    transition: left 0.4s ease;
+    z-index: 1002;
+    overflow-y: auto;
+}
+#menu-toggle:checked ~ .menu {
+    left: 0;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 80px 20px 20px;
+}
+.menu li {
+    margin: 15px 0;
+}
+.menu a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+}
+.menu a:hover {
+    color: #007bff;
+}
+
+/* スマホ対応 (768px以下) */
+@media (max-width: 768px) {
+    /* ロゴを少し小さく */
+    h1#logo { margin-left: 50px; }
+    h1#logo a { font-size: 32px; }
+    
+    /* 検索ボックスを隠す（狭すぎる場合）または縮める */
+    /* 必要に応じて display: none; にしてください */
+    .search-box {
+        margin: 0 10px;
+    }
+    
+    /* カートアイコン調整 */
+    #cart-icon { font-size: 26px; }
+}
+
+body {
+    padding-top: 80px !important;
 }

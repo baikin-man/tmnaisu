@@ -35,17 +35,13 @@ if (isset($_GET['signup']) && $_GET['signup'] == 'success') {
   <title>ZeZe — Login</title>
 
   <link rel="stylesheet" href="./css/G1.css">
-  <link rel="stylesheet" href="header2.css">
-  <style>
-    body {
-      padding-top: 115px;
-    }
-  </style>
+  <link rel="stylesheet" href="./css/header.css">
+
 </head>
 
 <body>
   <header class="site-header">
-    <?php require './header2.php'; ?>
+    <?php require './header.php'; ?>
   </header>
   <div class="wrap">
     <div class="login-card" role="region" aria-label="ログイン">

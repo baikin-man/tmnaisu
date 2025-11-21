@@ -77,12 +77,9 @@ $all_tags = $stmt_tags->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <!-- 共通ヘッダーCSS -->
-    <link rel="stylesheet" href="header2.css">
-    
-    <!-- ★ G2.css を読み込み (パスは G2.php と G2.css の位置関係で調整してください) -->
+    <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/G2.css"> 
     
     <title>ZeZe | ホーム</title>
@@ -90,7 +87,7 @@ $all_tags = $stmt_tags->fetchAll(PDO::FETCH_ASSOC);
 
 <body>
 
-    <?php require 'header2.php'; ?>
+    <?php require 'header.php'; ?>
 
     <div class="container">
 

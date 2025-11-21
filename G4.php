@@ -54,18 +54,13 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='./css/G4.css'>
-    <link rel='stylesheet' href='header2.css'>
+    <link rel='stylesheet' href='./css/header.css'>
 
     <title>ZeZe - カート</title>
-    <style>
-        body {
-            padding-top: 115px;
-        }
-    </style>
 </head>
 
 <body>
-    <?php require 'header2.php'; ?>
+    <?php require 'header.php'; ?>
 
     <div class="cart-container">
         <h2>ショッピングカート</h2>

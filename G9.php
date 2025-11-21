@@ -53,20 +53,14 @@ try {
     <title>購入確定画面 | ZeZe</title>
 
     <!-- ★ 外部CSSの読み込み ★ -->
-    <link rel="stylesheet" href="header2.css"> <!-- ヘッダーCSS -->
+    <link rel="stylesheet" href="./css/header.css"> <!-- ヘッダーCSS -->
     <link rel="stylesheet" href="./css/G9.css"> <!-- このページ専用CSS -->
 
-    <!-- ★ 固定ヘッダー用の余白 ★ -->
-    <style>
-        body {
-            /* G9.css 側で padding-top を指定するため、ここは削除してもOK */
-            padding-top: 115px; 
-        }
-    </style>
+
 </head>
 
 <body>
-    <?php require 'header2.php';?>
+    <?php require 'header.php';?>
 
     <!-- ★ 修正: G8.css と同じ .main で囲う -->
     <div class="main">
