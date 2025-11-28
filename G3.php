@@ -39,15 +39,17 @@ try {
     }
 
     // --- 6. 閲覧履歴を記録 (item_view_history) ---
-    $history_user_id = 0; 
+    $history_user_id = null; // ★ 修正: 初期値を null に変更
     if (isset($_SESSION['user_id'])) {
         $history_user_id = (int)$_SESSION['user_id'];
     }
+    
     $sql_history = $pdo->prepare('INSERT INTO item_view_history (user_id, item_id) VALUES (?, ?)');
     try {
         $sql_history->execute([$history_user_id, $item_id]);
     } catch (PDOException $e_history) {
-        // 履歴の登録失敗は無視
+        // エラーログを残す（開発時のみ有効にすると良い）
+        error_log($e_history->getMessage());
     }
 
     // 7. JavaScriptに渡すための全SKUデータ (JSON形式)
