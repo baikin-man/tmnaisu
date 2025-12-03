@@ -21,7 +21,7 @@ $success_message = '';
 if (isset($_GET['signup']) && $_GET['signup'] == 'success') {
   $success_message = 'アカウント作成が完了しました。ログインしてください。';
 }
-// ▲▲▲ PHP処理ブロックここまで ▲▲▲
+
 ?>
 <!doctype html>
 <html lang="ja">
@@ -60,8 +60,7 @@ if (isset($_GET['signup']) && $_GET['signup'] == 'success') {
         <button class="btn-login" type="submit">ログイン</button>
         <div class="card-links" aria-hidden="false">
           <a href="G10.php" style="text-align:left;">アカウント作成</a>
-          <a href="#" style="text-align:right;">パスワードを忘れた場合</a>
-        </div>
+          </div>
       </form>
     </div>
   </div>

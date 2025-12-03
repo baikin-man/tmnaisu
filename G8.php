@@ -114,13 +114,13 @@ try {
         <h3>お届け先</h3>
         <?php if ($address): ?>
           <p class="user-name"><?php echo htmlspecialchars($_SESSION['user_name'] ?? 'お客様'); // ユーザー名がセッションにあれば表示 
-                          ?> 様</p>
+          ?> 様</p>
           <p>〒<?php echo htmlspecialchars($address['postal_code']); ?></p>
           <p><?php echo htmlspecialchars($address['address']); ?></p>
         <?php endif; ?>
 
-        <!-- TODO: G9.php (サンキュー) ではなく、住所変更ページ (例: G_address_edit.php) に変更してください -->
-        <a href="G_address_edit.php" class="address-btn">変更する</a>
+
+        <a href="G6.php" class="address-btn">変更する</a>
       </div>
 
       <!-- ★ 修正: class="container" -> "payment-container" に変更 -->

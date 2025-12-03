@@ -48,7 +48,6 @@ if (session_status() === PHP_SESSION_NONE) {
             <?php endif; ?>
 
             <p>────────────</p>
-            <li><a href="#">お問い合わせ</a></li>
-        </ul>
+            </ul>
     </nav>
 </div>
